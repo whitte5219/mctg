@@ -22,7 +22,6 @@
             --danger: #c0392b;
             --moderator: #c0392b;
             --add-green: #27ae60;
-            --star: #888;
             --star-active: #fff;
             --radius: 6px;
             --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
@@ -60,7 +59,6 @@
             background: #2a2a2a;
         }
 
-        /* TOP NAV */
         .top-nav {
             background: var(--bg-nav);
             border-bottom: 1px solid var(--border);
@@ -193,7 +191,6 @@
             background: rgba(255, 255, 255, 0.03);
         }
 
-        /* MAIN CONTENT */
         .main-content {
             flex: 1;
             display: flex;
@@ -212,7 +209,6 @@
             from { opacity: 0; } to { opacity: 1; }
         }
 
-        /* HOME */
         #home-section {
             justify-content: center;
             align-items: center;
@@ -296,7 +292,6 @@
             font-weight: 500;
         }
 
-        /* TOOLS / GUIDES */
         #tools-section,
         #guides-section {
             padding: 24px 24px 40px;
@@ -504,7 +499,6 @@
             color: #fff;
         }
 
-        /* MODAL */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -601,8 +595,6 @@
             margin-top: -8px;
             margin-bottom: 8px;
         }
-
-        /* STAR RATING */
         .star-rating-interactive .star {
             font-size: 2rem;
             color: #333;
@@ -627,9 +619,8 @@
 </head>
 <body>
 
-    <!-- TOP NAV -->
     <nav class="top-nav">
-        <div class="nav-brand">MCTG <span>— Minecraft tools & guides</span></div>
+        <div class="nav-brand">MCTG <span>— Minecraft tools &amp; guides</span></div>
         <div class="nav-tabs">
             <button class="nav-tab active" data-tab="home">Home</button>
             <button class="nav-tab" data-tab="tools">Tools</button>
@@ -640,7 +631,6 @@
         </div>
     </nav>
 
-    <!-- MAIN -->
     <div class="main-content">
         <section class="page-section active" id="home-section">
             <h1 class="home-big-text" id="homeBigText">MCTG</h1>
@@ -661,7 +651,11 @@
                     <button class="mode-btn" data-mode="tags">Tags</button>
                 </div>
                 <input class="search-input" id="toolsSearchInput" placeholder="Search...">
-                <select class="filter-select" id="toolsPaidFilter"><option value="all">All</option><option value="yes">Paid</option><option value="no">Free</option></select>
+                <select class="filter-select" id="toolsPaidFilter">
+                    <option value="all">All</option>
+                    <option value="yes">Paid</option>
+                    <option value="no">Free</option>
+                </select>
                 <button class="search-btn" id="toolsSearchBtn">Search</button>
             </div>
             <div class="results-area" id="toolsResults"></div>
@@ -689,9 +683,14 @@
             <h3 id="authModalTitle">🔑 Login</h3>
             <div id="authError" style="color:#e74c3c;font-size:0.8rem;margin-bottom:10px;display:none;"></div>
             <form id="authForm" autocomplete="off">
-                <div id="usernameField" style="display:none;"><label>👤 Username</label><input type="text" id="authUsername" placeholder="How you want to be called..." minlength="2" maxlength="24"></div>
-                <label>📧 Email</label><input type="email" id="authEmail" required>
-                <label>🔒 Password</label><input type="password" id="authPassword" minlength="6" required>
+                <div id="usernameField" style="display:none;">
+                    <label for="authUsername">👤 Username</label>
+                    <input type="text" id="authUsername" placeholder="How you want to be called..." minlength="2" maxlength="24">
+                </div>
+                <label for="authEmail">📧 Email</label>
+                <input type="email" id="authEmail" required>
+                <label for="authPassword">🔒 Password</label>
+                <input type="password" id="authPassword" minlength="6" required>
                 <button type="submit" class="btn-primary" style="width:100%;margin-top:8px;" id="authSubmitBtn">⚡ Login</button>
             </form>
             <p style="text-align:center;margin-top:12px;font-size:0.78rem;color:#aaa;">
@@ -706,23 +705,34 @@
             <button class="close-btn" onclick="closeAddModal()">&times;</button>
             <h3>➕ Add New Entry</h3>
             <form id="addForm" autocomplete="off">
-                <label>Category</label><select id="addCategory" required><option value="tools">Tools</option><option value="guides">Guides</option></select>
-                <label>Subcategory</label><select id="addSubcategory" required></select>
-                <label>Name</label><input type="text" id="addName" maxlength="100" required>
-                <label>Tags (comma separated, max 10)</label>
+                <label for="addCategory">Category</label>
+                <select id="addCategory" required>
+                    <option value="tools">Tools</option>
+                    <option value="guides">Guides</option>
+                </select>
+                <label for="addSubcategory">Subcategory</label>
+                <select id="addSubcategory" required></select>
+                <label for="addName">Name</label>
+                <input type="text" id="addName" maxlength="100" required>
+                <label for="tagInput">Tags (comma separated, max 10)</label>
                 <div style="display:flex;gap:6px;margin-bottom:8px;">
                     <input type="text" id="tagInput" placeholder="Type tag and press Enter" style="flex:1;">
                 </div>
                 <div id="tagsDisplay" style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;"></div>
-                <label>Preview Description (max 500)</label><textarea id="addPreviewDesc" maxlength="500" rows="2"></textarea>
+                <label for="addPreviewDesc">Preview Description (max 500)</label>
+                <textarea id="addPreviewDesc" maxlength="500" rows="2"></textarea>
                 <div class="char-counter" id="previewCharCount">0 / 500</div>
-                <label>Full Description (max 4000)</label><textarea id="addFullDesc" maxlength="4000" rows="4"></textarea>
+                <label for="addFullDesc">Full Description (max 4000)</label>
+                <textarea id="addFullDesc" maxlength="4000" rows="4"></textarea>
                 <div class="char-counter" id="fullCharCount">0 / 4000</div>
-                <label>Image URL</label><input type="url" id="addImageUrl" placeholder="https://i.imgur.com/...">
-                <label>Links (name & url)</label><div id="linksContainer"></div>
+                <label for="addImageUrl">Image URL</label>
+                <input type="url" id="addImageUrl" placeholder="https://i.imgur.com/...">
+                <label>Links (name & url)</label>
+                <div id="linksContainer"></div>
                 <button type="button" class="btn-secondary" style="width:100%;margin-bottom:8px;" id="addLinkBtn">+ Add Link</button>
                 <div style="display:flex;align-items:center;gap:8px;margin:8px 0;">
-                    <input type="checkbox" id="addPaid"><label for="addPaid" style="margin:0;">Paid</label>
+                    <input type="checkbox" id="addPaid">
+                    <label for="addPaid" style="margin:0;text-transform:none;font-weight:400;color:#ccc;">Paid</label>
                 </div>
                 <button type="submit" class="btn-primary" style="width:100%;">✅ Submit</button>
             </form>
@@ -742,7 +752,7 @@
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-        import { getDatabase, ref, set, get, push, onValue, serverTimestamp, remove } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+        import { getDatabase, ref, set, get, push, onValue, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
 
         const firebaseConfig = {
             apiKey: "AIzaSyAEFAooiWJy3fPdQXV3RPVLMNppKyo4S94",
@@ -758,14 +768,12 @@
         const auth = getAuth(app);
         const db = getDatabase(app);
 
-        // STATE
         let currentUser = null, isModerator = false, activeMainTab = 'home';
         let activeToolsSub = 'all', activeGuidesSub = 'all';
         let allToolsCache = [], allGuidesCache = [];
         let isRegisterMode = false, pendingTags = [], pendingLinks = [];
         let toolsSearchMode = 'name', guidesSearchMode = 'name';
 
-        // DOM
         const $ = id => document.getElementById(id);
         const toolsSubTabs = $('toolsSubTabs'), guidesSubTabs = $('guidesSubTabs');
         const toolsSubDesc = $('toolsSubDesc'), guidesSubDesc = $('guidesSubDesc');
@@ -788,16 +796,11 @@
             other: 'Miscellaneous guides that don\'t fit the other categories.'
         };
 
-        // Toast
         function toast(msg, d=2500){ const t=$('toast'); t.textContent=msg; t.style.display='block'; clearTimeout(t._t); t._t=setTimeout(()=>{t.style.display='none';},d); }
 
-        // Auth
-        function openAuthModal(){ $('authModalOverlay').classList.add('open'); }
-        function closeAuthModal(){ $('authModalOverlay').classList.remove('open'); }
-        window.openAuthModal=openAuthModal; window.closeAuthModal=closeAuthModal;
-
-        function toggleAuthMode(){ isRegisterMode=!isRegisterMode; updateAuthUI(); }
-        window.toggleAuthMode=toggleAuthMode;
+        window.openAuthModal = () => $('authModalOverlay').classList.add('open');
+        window.closeAuthModal = () => $('authModalOverlay').classList.remove('open');
+        window.toggleAuthMode = () => { isRegisterMode = !isRegisterMode; updateAuthUI(); };
         function updateAuthUI(){
             $('authModalTitle').textContent=isRegisterMode?'📝 Register':'🔑 Login';
             $('authSubmitBtn').textContent=isRegisterMode?'✨ Create Account':'⚡ Login';
@@ -806,6 +809,7 @@
             $('usernameField').style.display=isRegisterMode?'block':'none';
             $('authUsername').required=isRegisterMode;
         }
+
         $('authForm').addEventListener('submit', async (e)=>{
             e.preventDefault();
             const email=$('authEmail').value.trim(), password=$('authPassword').value;
@@ -823,7 +827,6 @@
             }catch(err){ $('authError').textContent=err.message; $('authError').style.display='block'; }
         });
 
-        // Auth state
         onAuthStateChanged(auth, async (user)=>{
             currentUser=user;
             if(user){
@@ -853,12 +856,10 @@
                 navRight.innerHTML=h;
             }else navRight.innerHTML='<button class="login-btn" onclick="openAuthModal()">🔑 Login / Register</button>';
         }
-        async function doLogout(){ await signOut(auth); toast('👋 Logged out.'); }
-        window.doLogout=doLogout;
+        window.doLogout = async ()=>{ await signOut(auth); toast('👋 Logged out.'); };
 
         function escapeHTML(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
 
-        // Data listeners
         function setupListeners(){
             onValue(ref(db,'tools'), snap=>{
                 const d=snap.val()||{}; allToolsCache=Object.entries(d).map(([id,v])=>({id,...v}));
@@ -870,24 +871,32 @@
             });
         }
 
-        // Tab switching
-        window.switchTab=function(tab){
-            if(activeMainTab===tab) return;
-            activeMainTab=tab;
-            document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+        // Main tab switching
+        function switchTab(tab) {
+            if (activeMainTab === tab) return;
+            activeMainTab = tab;
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
             document.querySelector(`.nav-tab[data-tab="${tab}"]`).classList.add('active');
-            document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));
-            if(tab==='home'){
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            if (tab === 'home') {
                 $('home-section').classList.add('active');
                 animateHome();
-            }else if(tab==='tools'){
+            } else if (tab === 'tools') {
                 $('tools-section').classList.add('active');
                 renderTools();
-            }else{
+            } else if (tab === 'guides') {
                 $('guides-section').classList.add('active');
                 renderGuides();
             }
-        };
+        }
+        window.switchTab = switchTab;
+
+        // Nav tab click delegation
+        document.querySelector('.nav-tabs').addEventListener('click', (e) => {
+            if (e.target.classList.contains('nav-tab')) {
+                switchTab(e.target.dataset.tab);
+            }
+        });
 
         function refreshView(){
             if(activeMainTab==='tools') renderTools();
@@ -895,7 +904,6 @@
             else animateHome();
         }
 
-        // Sub tabs rendering
         function buildSubTabs(container, categories, current){
             container.innerHTML = categories.map(cat=>{
                 const label = cat==='all'?'All':cat.charAt(0).toUpperCase()+cat.slice(1);
@@ -903,7 +911,6 @@
             }).join('');
         }
 
-        // Tools sub handlers
         const toolSubs = ['all','pve','pvp','building','multifunctional'];
         function switchToolsSub(sub){
             activeToolsSub=sub;
@@ -913,7 +920,6 @@
         }
         window.switchToolsSub=switchToolsSub;
 
-        // Guides sub handlers
         const guideSubs = ['all','buildings','farms','glitches','survival','other'];
         function switchGuidesSub(sub){
             activeGuidesSub=sub;
@@ -923,17 +929,14 @@
         }
         window.switchGuidesSub=switchGuidesSub;
 
-        // Build initial tabs
         buildSubTabs(toolsSubTabs, toolSubs, 'all');
         buildSubTabs(guidesSubTabs, guideSubs, 'all');
         toolsSubDesc.textContent=subDescsTools.all;
         guidesSubDesc.textContent=subDescsGuides.all;
 
-        // Click delegation for sub tabs
         toolsSubTabs.addEventListener('click', e=>{ if(e.target.classList.contains('sub-tab')) switchToolsSub(e.target.dataset.sub); });
         guidesSubTabs.addEventListener('click', e=>{ if(e.target.classList.contains('sub-tab')) switchGuidesSub(e.target.dataset.sub); });
 
-        // Search mode toggles
         $('toolsSearchMode').addEventListener('click', e=>{
             if(e.target.classList.contains('mode-btn')){
                 toolsSearchMode=e.target.dataset.mode;
@@ -951,7 +954,6 @@
             }
         });
 
-        // Render functions
         function renderTools(){
             if(!currentUser){ toolsResults.innerHTML='<div class="login-prompt">🔒 Login to view — top right button</div>'; return; }
             const query=$('toolsSearchInput').value.trim().toLowerCase();
@@ -1018,7 +1020,6 @@
             }));
         }
 
-        // View modal
         function openViewModal(item, type){
             const ratings=item.ratings||{};
             const vals=Object.values(ratings);
@@ -1062,11 +1063,9 @@
                 });
             }
         }
-        function closeViewModal(){ $('viewModalOverlay').classList.remove('open'); }
-        window.closeViewModal=closeViewModal;
+        window.closeViewModal = () => $('viewModalOverlay').classList.remove('open');
 
-        // Add modal
-        window.openAddModal=function(){
+        window.openAddModal = function(){
             if(!isModerator) return toast('❌ Moderator only.');
             pendingTags=[]; pendingLinks=[];
             $('addForm').reset();
@@ -1074,8 +1073,7 @@
             updateAddSubcategories();
             $('addModalOverlay').classList.add('open');
         };
-        function closeAddModal(){ $('addModalOverlay').classList.remove('open'); }
-        window.closeAddModal=closeAddModal;
+        window.closeAddModal = () => $('addModalOverlay').classList.remove('open');
 
         function updateAddSubcategories(){
             const cat=$('addCategory').value;
@@ -1131,18 +1129,15 @@
             toast('✅ Added!'); closeAddModal();
         });
 
-        // Character counters
         $('addPreviewDesc').addEventListener('input',()=>$('previewCharCount').textContent=`${$('addPreviewDesc').value.length} / 500`);
         $('addFullDesc').addEventListener('input',()=>$('fullCharCount').textContent=`${$('addFullDesc').value.length} / 4000`);
 
-        // Search triggers
         $('toolsSearchInput').addEventListener('keydown',e=>{if(e.key==='Enter')renderTools();});
         $('toolsPaidFilter').addEventListener('change',renderTools);
         $('toolsSearchBtn').addEventListener('click',renderTools);
         $('guidesSearchInput').addEventListener('keydown',e=>{if(e.key==='Enter')renderGuides();});
         $('guidesSearchBtn').addEventListener('click',renderGuides);
 
-        // Home animations
         function animateHome(){
             const big=$('homeBigText');
             big.style.opacity='1';
@@ -1153,8 +1148,7 @@
             animateCounters();
         }
         function animateCounters(){
-            const ids=['statTools','statGuides','statUsers'];
-            ids.forEach(id=>{
+            ['statTools','statGuides','statUsers'].forEach(id=>{
                 const el=$(id);
                 const target=+el.getAttribute('data-target')||0;
                 rollNumber(el, target);
@@ -1172,7 +1166,7 @@
             }
             requestAnimationFrame(update);
         }
-        // Stats listener
+
         onValue(ref(db,'tools'), snap=>{ const c=snap.exists()?Object.keys(snap.val()).length:0; $('statTools').setAttribute('data-target',c); if(activeMainTab==='home') rollNumber($('statTools'),c); });
         onValue(ref(db,'guides'), snap=>{ const c=snap.exists()?Object.keys(snap.val()).length:0; $('statGuides').setAttribute('data-target',c); if(activeMainTab==='home') rollNumber($('statGuides'),c); });
         onValue(ref(db,'activeUsers'), snap=>{
@@ -1183,10 +1177,10 @@
             if(activeMainTab==='home') rollNumber($('statUsers'),count);
         });
 
-        // Init
         setupListeners();
         updateAddSubcategories();
         animateHome();
+
         window.addEventListener('click',function(e){
             if(e.target===$('authModalOverlay')) closeAuthModal();
             if(e.target===$('addModalOverlay')) closeAddModal();
