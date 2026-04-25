@@ -1178,20 +1178,25 @@
         onAuthStateChanged(auth, async (user) => {
             currentUser = user;
             if (user) {
-                // Check moderator
-                const sanitizedEmail = user.email.replace(/\./g, ',');
-                const modSnap = await get(ref(db, 'moderators/' + sanitizedEmail));
-                isModerator = modSnap.exists();
-
-                // Track daily active
-                const today = new Date().toISOString().split('T')[0];
-                await set(ref(db, 'activeUsers/' + user.uid), { date: today, email: user.email, lastSeen: serverTimestamp() });
-
-                // Get username
+                try {
+                    const sanitizedEmail = user.email.replace(/\./g, ',');
+                    const modSnap = await get(ref(db, 'moderators/' + sanitizedEmail));
+                    isModerator = modSnap.exists();
+                } catch (e) {
+                    isModerator = false; // silent fallback
+                }
+        
+                // Track daily active – safe, permission granted by new rules
+                try {
+                    const today = new Date().toISOString().split('T')[0];
+                    await set(ref(db, 'activeUsers/' + user.uid), { date: today, email: user.email, lastSeen: serverTimestamp() });
+                } catch (e) {
+                    console.warn('Active user tracking skipped:', e.message);
+                }
+        
                 const userSnap = await get(ref(db, 'users/' + user.uid));
                 const userData = userSnap.val() || {};
                 const displayName = userData.username || user.email.split('@')[0];
-
                 renderNavRight(displayName);
             } else {
                 currentUser = null;
