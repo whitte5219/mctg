@@ -18,19 +18,14 @@
             --text-mid: #aaaaaa;
             --text-dim: #666666;
             --text-bright: #ffffff;
-            --accent: #ffffff;
             --discord: #5865F2;
             --danger: #c0392b;
-            --danger-bright: #e74c3c;
             --moderator: #c0392b;
             --add-green: #27ae60;
-            --star: #888888;
-            --star-active: #ffffff;
+            --star: #888;
+            --star-active: #fff;
             --radius: 6px;
-            --radius-sm: 4px;
-            --radius-lg: 10px;
-            --transition: 0.2s ease;
-            --font: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
         }
 
         * {
@@ -65,7 +60,7 @@
             background: #2a2a2a;
         }
 
-        /* ========== TOP NAV ========== */
+        /* TOP NAV */
         .top-nav {
             background: var(--bg-nav);
             border-bottom: 1px solid var(--border);
@@ -79,7 +74,6 @@
             top: 0;
             z-index: 100;
             user-select: none;
-            gap: 12px;
         }
         .nav-brand {
             font-size: 0.82rem;
@@ -87,7 +81,6 @@
             color: var(--text-bright);
             letter-spacing: 0.3px;
             white-space: nowrap;
-            flex-shrink: 0;
         }
         .nav-brand span {
             color: var(--text-dim);
@@ -95,7 +88,6 @@
         }
         .nav-tabs {
             display: flex;
-            align-items: center;
             gap: 4px;
             position: absolute;
             left: 50%;
@@ -108,11 +100,11 @@
             font-size: 0.8rem;
             font-weight: 500;
             color: var(--text-dim);
-            transition: all var(--transition);
             background: transparent;
             border: none;
             font-family: var(--font);
             white-space: nowrap;
+            transition: 0.2s;
         }
         .nav-tab:hover {
             color: var(--text-mid);
@@ -124,7 +116,6 @@
             font-weight: 600;
         }
         .nav-right {
-            flex-shrink: 0;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -142,9 +133,6 @@
             align-items: center;
             justify-content: center;
             border: 2px solid #8b0000;
-            flex-shrink: 0;
-            letter-spacing: 0;
-            line-height: 1;
         }
         .add-btn {
             width: 28px;
@@ -156,12 +144,10 @@
             font-weight: 700;
             border: 2px solid #1e7a3a;
             cursor: pointer;
+            transition: 0.2s;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all var(--transition);
-            flex-shrink: 0;
-            line-height: 1;
         }
         .add-btn:hover {
             background: #2ecc71;
@@ -176,8 +162,7 @@
             font-size: 0.76rem;
             font-weight: 500;
             cursor: pointer;
-            transition: all var(--transition);
-            font-family: var(--font);
+            transition: 0.2s;
             white-space: nowrap;
         }
         .login-btn:hover {
@@ -200,8 +185,7 @@
             border-radius: 14px;
             cursor: pointer;
             font-size: 0.7rem;
-            transition: all var(--transition);
-            font-family: var(--font);
+            transition: 0.2s;
         }
         .logout-btn:hover {
             border-color: #444;
@@ -209,7 +193,7 @@
             background: rgba(255, 255, 255, 0.03);
         }
 
-        /* ========== MAIN CONTENT ========== */
+        /* MAIN CONTENT */
         .main-content {
             flex: 1;
             display: flex;
@@ -218,22 +202,17 @@
         .page-section {
             display: none;
             flex: 1;
-            animation: fadeIn 0.35s ease;
+            animation: fadeIn 0.35s;
         }
         .page-section.active {
             display: flex;
             flex-direction: column;
         }
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; } to { opacity: 1; }
         }
 
-        /* ========== HOME ========== */
+        /* HOME */
         #home-section {
             justify-content: center;
             align-items: center;
@@ -248,13 +227,14 @@
             letter-spacing: -2px;
             color: var(--text-bright);
             line-height: 1;
-            opacity: 0;
-            transform: translateY(16px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
+            transition: opacity 0.7s;
         }
-        .home-big-text.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .home-big-text.flicker {
+            animation: flicker 0.2s 3;
+        }
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
         }
         .home-subtitle {
             font-size: 1rem;
@@ -263,7 +243,7 @@
             line-height: 1.6;
             opacity: 0;
             transform: translateY(12px);
-            transition: opacity 0.7s ease 0.15s, transform 0.7s ease 0.15s;
+            transition: opacity 0.7s 0.15s, transform 0.7s 0.15s;
             margin: 0 auto;
         }
         .home-subtitle.visible {
@@ -278,7 +258,7 @@
             margin-top: 12px;
             opacity: 0;
             transform: translateY(20px);
-            transition: opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s;
+            transition: opacity 0.7s 0.3s, transform 0.7s 0.3s;
         }
         .home-stats-row.visible {
             opacity: 1;
@@ -291,14 +271,13 @@
             padding: 22px 28px;
             min-width: 150px;
             text-align: center;
-            transition: all var(--transition);
-            cursor: default;
+            transition: 0.2s;
         }
         .stat-card:hover {
             border-color: var(--border-hover);
             background: #0d0d0d;
             transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.6);
         }
         .stat-number {
             font-size: 2.6rem;
@@ -307,7 +286,6 @@
             letter-spacing: -1px;
             line-height: 1;
             margin-bottom: 6px;
-            font-variant-numeric: tabular-nums;
             font-family: 'SF Mono', 'JetBrains Mono', 'Consolas', monospace;
         }
         .stat-label {
@@ -318,11 +296,10 @@
             font-weight: 500;
         }
 
-        /* ========== TOOLS & GUIDES SECTIONS ========== */
+        /* TOOLS / GUIDES */
         #tools-section,
         #guides-section {
             padding: 24px 24px 40px;
-            gap: 0;
             min-height: calc(100vh - 52px);
         }
         .sub-tabs-row {
@@ -340,28 +317,24 @@
             font-size: 0.76rem;
             font-weight: 500;
             color: var(--text-dim);
-            transition: all var(--transition);
             background: transparent;
             border: none;
-            font-family: var(--font);
-            letter-spacing: 0.3px;
+            transition: 0.2s;
         }
         .sub-tab:hover {
             color: var(--text-mid);
-            background: rgba(255, 255, 255, 0.025);
+            background: rgba(255,255,255,0.025);
         }
         .sub-tab.active {
             color: var(--text-bright);
-            background: rgba(255, 255, 255, 0.07);
+            background: rgba(255,255,255,0.07);
             font-weight: 600;
         }
         .sub-description {
             font-size: 0.82rem;
             color: var(--text-dim);
             margin-bottom: 16px;
-            line-height: 1.5;
             font-style: italic;
-            letter-spacing: 0.2px;
         }
         .search-row {
             display: flex;
@@ -376,47 +349,46 @@
             padding: 10px 14px;
             background: var(--bg-input);
             border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
+            border-radius: var(--radius);
             color: var(--text);
             font-size: 0.85rem;
-            font-family: var(--font);
             outline: none;
-            transition: all var(--transition);
         }
         .search-input:focus {
             border-color: var(--border-hover);
-            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.03);
         }
-        .search-input::placeholder {
-            color: #444;
+        .search-mode-toggle {
+            display: flex;
+            gap: 4px;
+            background: #0a0a0a;
+            border-radius: 20px;
+            padding: 3px;
         }
-        .filter-select {
-            padding: 10px 12px;
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            color: var(--text);
-            font-size: 0.82rem;
-            font-family: var(--font);
-            outline: none;
+        .mode-btn {
+            padding: 6px 14px;
+            border-radius: 16px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-dim);
+            background: transparent;
+            border: none;
             cursor: pointer;
-            transition: all var(--transition);
-            min-width: 80px;
+            transition: 0.2s;
         }
-        .filter-select:focus {
-            border-color: var(--border-hover);
+        .mode-btn.active {
+            background: #1a1a1a;
+            color: #fff;
         }
         .search-btn {
             padding: 10px 18px;
             background: #111;
             border: 1px solid var(--border-light);
-            border-radius: var(--radius-sm);
+            border-radius: var(--radius);
             color: var(--text-mid);
             cursor: pointer;
             font-size: 0.82rem;
             font-weight: 500;
-            font-family: var(--font);
-            transition: all var(--transition);
+            transition: 0.2s;
             white-space: nowrap;
         }
         .search-btn:hover {
@@ -424,107 +396,99 @@
             border-color: var(--border-hover);
             color: var(--text-bright);
         }
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        .filter-select {
+            padding: 10px 12px;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            color: var(--text);
+            font-size: 0.82rem;
+            cursor: pointer;
+            outline: none;
+        }
+        .results-area {
+            display: flex;
+            flex-direction: column;
             gap: 14px;
             flex: 1;
-            align-content: flex-start;
         }
         .login-prompt {
             text-align: center;
             padding: 50px 20px;
             color: var(--text-dim);
             font-size: 0.9rem;
-            letter-spacing: 0.3px;
-            grid-column: 1 / -1;
-        }
-        .login-prompt .icon-placeholder {
-            font-size: 2.5rem;
-            display: block;
-            margin-bottom: 12px;
-            opacity: 0.5;
-        }
-        .login-prompt strong {
-            color: var(--discord);
-            font-weight: 600;
         }
         .item-banner {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
+            border-radius: 10px;
             padding: 18px 20px;
             display: flex;
-            flex-direction: column;
-            gap: 8px;
-            transition: all var(--transition);
-            cursor: default;
-            position: relative;
+            gap: 14px;
+            transition: 0.2s;
+            cursor: pointer;
+            align-items: flex-start;
+            width: 100%;
         }
         .item-banner:hover {
             border-color: var(--border-hover);
             background: #0d0d0d;
             transform: translateY(-2px);
-            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.5);
         }
-        .item-banner .item-name {
+        .banner-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: #111;
+            border: 1px solid #222;
+            flex-shrink: 0;
+        }
+        .banner-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .banner-name {
             font-size: 1.05rem;
             font-weight: 700;
             color: var(--text-bright);
-            letter-spacing: -0.3px;
-            line-height: 1.3;
         }
-        .item-banner .item-tags {
+        .banner-tags {
             display: flex;
             flex-wrap: wrap;
             gap: 4px;
         }
-        .item-banner .item-tag {
+        .banner-tag {
             font-size: 0.68rem;
             color: #777;
             background: #0f0f0f;
             padding: 2px 8px;
             border-radius: 10px;
             border: 1px solid #1a1a1a;
-            letter-spacing: 0.3px;
         }
-        .item-banner .item-preview {
+        .banner-preview {
             font-size: 0.8rem;
             color: var(--text-dim);
             line-height: 1.5;
-            flex: 1;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
         }
-        .item-banner .item-footer {
+        .banner-footer {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 10px;
             margin-top: auto;
-            padding-top: 8px;
-            border-top: 1px solid var(--border);
         }
         .item-rating {
             display: flex;
             align-items: center;
             gap: 6px;
             font-size: 0.78rem;
-            color: var(--text-mid);
-        }
-        .item-rating .stars {
-            color: #ffffff;
-            letter-spacing: 1px;
-            font-size: 0.85rem;
-        }
-        .item-rating .count {
-            color: var(--text-dim);
-            font-size: 0.7rem;
+            color: #ddd;
         }
         .view-btn {
-            padding: 7px 16px;
+            padding: 6px 16px;
             background: #111;
             border: 1px solid var(--border-light);
             border-radius: 16px;
@@ -532,28 +496,19 @@
             cursor: pointer;
             font-size: 0.75rem;
             font-weight: 500;
-            font-family: var(--font);
-            transition: all var(--transition);
-            white-space: nowrap;
+            transition: 0.2s;
         }
         .view-btn:hover {
             background: #1a1a1a;
             border-color: #444;
-            color: var(--text-bright);
-        }
-        .results-empty {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-dim);
-            font-size: 0.85rem;
-            grid-column: 1 / -1;
+            color: #fff;
         }
 
-        /* ========== MODAL ========== */
+        /* MODAL */
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0,0,0,0.85);
             z-index: 200;
             display: none;
             align-items: center;
@@ -566,31 +521,24 @@
         .modal {
             background: var(--bg-modal);
             border: 1px solid var(--border-light);
-            border-radius: var(--radius-lg);
-            padding: 28px 24px;
+            border-radius: 10px;
+            padding: 24px;
             width: 100%;
-            max-width: 600px;
+            max-width: 620px;
             max-height: 85vh;
             overflow-y: auto;
             position: relative;
-            animation: modalIn 0.25s ease;
+            animation: modalIn 0.25s;
         }
         @keyframes modalIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95) translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
         .modal h3 {
             font-size: 1.1rem;
             font-weight: 700;
-            color: var(--text-bright);
-            margin-bottom: 18px;
-            letter-spacing: -0.3px;
+            color: #fff;
+            margin-bottom: 16px;
         }
         .modal .close-btn {
             position: absolute;
@@ -598,22 +546,16 @@
             right: 16px;
             background: none;
             border: none;
-            color: var(--text-dim);
+            color: #666;
             font-size: 1.4rem;
             cursor: pointer;
-            transition: all var(--transition);
-            line-height: 1;
-        }
-        .modal .close-btn:hover {
-            color: var(--text-bright);
         }
         .modal label {
             display: block;
             font-size: 0.75rem;
             font-weight: 600;
-            color: var(--text-mid);
+            color: #aaa;
             margin-bottom: 4px;
-            letter-spacing: 0.5px;
             text-transform: uppercase;
         }
         .modal input,
@@ -623,29 +565,15 @@
             padding: 10px 12px;
             background: var(--bg-input);
             border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            color: var(--text);
+            border-radius: 4px;
+            color: #fff;
             font-size: 0.85rem;
-            font-family: var(--font);
             outline: none;
-            transition: all var(--transition);
             margin-bottom: 12px;
-            resize: vertical;
-        }
-        .modal input:focus,
-        .modal textarea:focus,
-        .modal select:focus {
-            border-color: var(--border-hover);
-            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.03);
         }
         .modal textarea {
-            min-height: 80px;
-        }
-        .modal .btn-row {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-top: 6px;
+            resize: vertical;
+            min-height: 70px;
         }
         .modal .btn-primary {
             padding: 10px 22px;
@@ -656,355 +584,165 @@
             cursor: pointer;
             font-weight: 600;
             font-size: 0.82rem;
-            font-family: var(--font);
-            transition: all var(--transition);
-        }
-        .modal .btn-primary:hover {
-            background: #ddd;
         }
         .modal .btn-secondary {
             padding: 10px 22px;
             background: transparent;
-            color: var(--text-mid);
-            border: 1px solid var(--border-light);
+            color: #aaa;
+            border: 1px solid #333;
             border-radius: 20px;
             cursor: pointer;
-            font-weight: 500;
             font-size: 0.82rem;
-            font-family: var(--font);
-            transition: all var(--transition);
         }
-        .modal .btn-secondary:hover {
-            border-color: #444;
-            color: var(--text-bright);
-        }
-        .modal .btn-danger {
-            padding: 10px 22px;
-            background: var(--danger);
-            color: #fff;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.82rem;
-            font-family: var(--font);
-        }
-        .modal .link-entry {
-            display: flex;
-            gap: 6px;
-            align-items: center;
-            margin-bottom: 6px;
-        }
-        .modal .link-entry input {
-            flex: 1;
-            margin-bottom: 0;
-        }
-        .modal .link-entry button {
-            padding: 8px 14px;
-            background: var(--danger);
-            color: #fff;
-            border: none;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            font-size: 0.75rem;
-            font-family: var(--font);
-        }
-        .tag-entry-row {
-            display: flex;
-            gap: 6px;
-            align-items: center;
-            flex-wrap: wrap;
+        .char-counter {
+            font-size: 0.68rem;
+            color: #666;
+            text-align: right;
+            margin-top: -8px;
             margin-bottom: 8px;
         }
-        .tag-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            background: #111;
-            border: 1px solid #2a2a2a;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            color: #999;
-        }
-        .tag-pill .remove-tag {
-            cursor: pointer;
-            color: #666;
-            font-weight: 700;
-            margin-left: 2px;
-        }
-        .tag-pill .remove-tag:hover {
-            color: #fff;
-        }
-        .star-rating-interactive {
-            display: flex;
-            gap: 4px;
-            font-size: 2rem;
-            cursor: pointer;
-            user-select: none;
-        }
+
+        /* STAR RATING */
         .star-rating-interactive .star {
+            font-size: 2rem;
             color: #333;
-            transition: color 0.15s;
+            cursor: pointer;
         }
         .star-rating-interactive .star.hover,
         .star-rating-interactive .star.selected {
             color: #fff;
         }
-        .comment-entry {
-            margin-top: 8px;
-        }
-        .comment-entry textarea {
-            width: 100%;
-            min-height: 60px;
-            margin-bottom: 6px;
-        }
-        .comments-list {
-            margin-top: 12px;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-        .comment-item {
-            background: #0a0a0a;
-            border: 1px solid #1a1a1a;
-            border-radius: var(--radius-sm);
-            padding: 10px 12px;
-            margin-bottom: 6px;
-            font-size: 0.78rem;
-            color: var(--text-dim);
-        }
-        .comment-item strong {
-            color: var(--text-mid);
-        }
-        .comment-item .comment-stars {
-            color: #fff;
-            font-size: 0.7rem;
-        }
-        .link-buttons-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 10px;
-        }
-        .link-btn {
-            padding: 8px 16px;
-            background: #111;
-            border: 1px solid var(--border-light);
-            border-radius: 20px;
-            color: var(--text-mid);
-            cursor: pointer;
-            font-size: 0.78rem;
-            font-family: var(--font);
-            text-decoration: none;
-            transition: all var(--transition);
-            display: inline-block;
-        }
-        .link-btn:hover {
-            background: #1a1a1a;
-            border-color: #444;
-            color: #fff;
-        }
-        .char-counter {
-            font-size: 0.68rem;
-            color: var(--text-dim);
-            text-align: right;
-            margin-top: -8px;
-            margin-bottom: 8px;
-        }
-        .char-counter.over {
-            color: #e74c3c;
-        }
 
         @media (max-width: 768px) {
-            .top-nav {
-                padding: 0 10px;
-                height: 44px;
-                gap: 6px;
-            }
-            .nav-brand {
-                font-size: 0.65rem;
-            }
             .nav-tabs {
                 position: static;
                 transform: none;
-                gap: 1px;
             }
-            .nav-tab {
-                padding: 6px 10px;
-                font-size: 0.65rem;
-                border-radius: 12px;
-            }
-            .nav-right {
-                gap: 4px;
-            }
-            .login-btn {
-                padding: 5px 10px;
-                font-size: 0.65rem;
-            }
-            .results-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
-            #tools-section,
-            #guides-section {
-                padding: 14px 10px 30px;
-            }
-            .search-row {
-                flex-direction: column;
-                gap: 6px;
-            }
-            .search-input,
-            .filter-select,
-            .search-btn {
-                width: 100%;
-            }
-            .modal {
-                padding: 18px 14px;
-                max-width: 95vw;
+            .banner-image {
+                width: 50px;
+                height: 50px;
             }
         }
     </style>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- ==================== TOP NAV ==================== -->
+    <!-- TOP NAV -->
     <nav class="top-nav">
-        <div class="nav-brand">MCTG <span>— Minecraft tools &amp; guides</span></div>
+        <div class="nav-brand">MCTG <span>— Minecraft tools & guides</span></div>
         <div class="nav-tabs">
-            <button class="nav-tab active" data-tab="home" id="navHome">Home</button>
-            <button class="nav-tab" data-tab="tools" id="navTools">Tools</button>
-            <button class="nav-tab" data-tab="guides" id="navGuides">Guides</button>
+            <button class="nav-tab active" data-tab="home">Home</button>
+            <button class="nav-tab" data-tab="tools">Tools</button>
+            <button class="nav-tab" data-tab="guides">Guides</button>
         </div>
         <div class="nav-right" id="navRight">
-            <button class="login-btn" id="loginBtn" onclick="openAuthModal()">🔑 Login / Register</button>
+            <button class="login-btn" onclick="openAuthModal()">🔑 Login / Register</button>
         </div>
     </nav>
 
-    <!-- ==================== MAIN CONTENT ==================== -->
+    <!-- MAIN -->
     <div class="main-content">
-        <!-- HOME -->
         <section class="page-section active" id="home-section">
             <h1 class="home-big-text" id="homeBigText">MCTG</h1>
             <p class="home-subtitle" id="homeSubtitle">This is the homepage of MCTG, a place where you can find any tool for any purpose, or any guide for anything for Minecraft, welcome.</p>
             <div class="home-stats-row" id="homeStatsRow">
                 <div class="stat-card"><div class="stat-number" id="statTools">0</div><div class="stat-label">Total Tools</div></div>
                 <div class="stat-card"><div class="stat-number" id="statGuides">0</div><div class="stat-label">Total Guides</div></div>
-                <div class="stat-card"><div class="stat-number" id="statUsers">0</div><div class="stat-label">Daily Active Users</div></div>
+                <div class="stat-card"><div class="stat-number" id="statUsers">0</div><div class="stat-label">Daily Active</div></div>
             </div>
         </section>
 
-        <!-- TOOLS -->
         <section class="page-section" id="tools-section">
-            <div class="sub-tabs-row" id="toolsSubTabs">
-                <button class="sub-tab active" data-sub="pve">PvE</button>
-                <button class="sub-tab" data-sub="pvp">PvP</button>
-                <button class="sub-tab" data-sub="building">Building</button>
-                <button class="sub-tab" data-sub="multifunctional">Multifunctional</button>
-            </div>
-            <p class="sub-description" id="toolsSubDesc">Tools for PvE, farming mobs, looting structures, or just normal survival.</p>
+            <div class="sub-tabs-row" id="toolsSubTabs"></div>
+            <p class="sub-description" id="toolsSubDesc"></p>
             <div class="search-row">
-                <input type="text" class="search-input" id="toolsSearchInput" placeholder="Search tools...">
-                <select class="filter-select" id="toolsPaidFilter"><option value="all">All</option><option value="yes">Paid: Yes</option><option value="no">Paid: No</option></select>
+                <div class="search-mode-toggle" id="toolsSearchMode">
+                    <button class="mode-btn active" data-mode="name">Name</button>
+                    <button class="mode-btn" data-mode="tags">Tags</button>
+                </div>
+                <input class="search-input" id="toolsSearchInput" placeholder="Search...">
+                <select class="filter-select" id="toolsPaidFilter"><option value="all">All</option><option value="yes">Paid</option><option value="no">Free</option></select>
                 <button class="search-btn" id="toolsSearchBtn">Search</button>
             </div>
-            <div class="results-grid" id="toolsResults"></div>
+            <div class="results-area" id="toolsResults"></div>
         </section>
 
-        <!-- GUIDES -->
         <section class="page-section" id="guides-section">
-            <div class="sub-tabs-row" id="guidesSubTabs">
-                <button class="sub-tab active" data-sub="buildings">Buildings</button>
-                <button class="sub-tab" data-sub="farms">Farms</button>
-                <button class="sub-tab" data-sub="glitches">Game Breaking &amp; Glitches</button>
-                <button class="sub-tab" data-sub="survival">Survival</button>
-                <button class="sub-tab" data-sub="other">Other</button>
-            </div>
-            <p class="sub-description" id="guidesSubDesc">Guides for constructing impressive buildings and structures.</p>
+            <div class="sub-tabs-row" id="guidesSubTabs"></div>
+            <p class="sub-description" id="guidesSubDesc"></p>
             <div class="search-row">
-                <input type="text" class="search-input" id="guidesSearchInput" placeholder="Search guides...">
+                <div class="search-mode-toggle" id="guidesSearchMode">
+                    <button class="mode-btn active" data-mode="name">Name</button>
+                    <button class="mode-btn" data-mode="tags">Tags</button>
+                </div>
+                <input class="search-input" id="guidesSearchInput" placeholder="Search...">
                 <button class="search-btn" id="guidesSearchBtn">Search</button>
             </div>
-            <div class="results-grid" id="guidesResults"></div>
+            <div class="results-area" id="guidesResults"></div>
         </section>
     </div>
 
-    <!-- ==================== AUTH MODAL ==================== -->
+    <!-- AUTH MODAL -->
     <div class="modal-overlay" id="authModalOverlay">
-        <div class="modal" id="authModal">
+        <div class="modal">
             <button class="close-btn" onclick="closeAuthModal()">&times;</button>
             <h3 id="authModalTitle">🔑 Login</h3>
             <div id="authError" style="color:#e74c3c;font-size:0.8rem;margin-bottom:10px;display:none;"></div>
             <form id="authForm" autocomplete="off">
-                <div id="usernameField" style="display:none;">
-                    <label>👤 Username</label>
-                    <input type="text" id="authUsername" placeholder="How you want to be called..." minlength="2" maxlength="24" autocomplete="off">
-                </div>
-                <label>📧 Email</label>
-                <input type="email" id="authEmail" placeholder="your@email.com" required autocomplete="email">
-                <label>🔒 Password</label>
-                <input type="password" id="authPassword" placeholder="Min. 6 characters" required minlength="6" autocomplete="new-password">
+                <div id="usernameField" style="display:none;"><label>👤 Username</label><input type="text" id="authUsername" placeholder="How you want to be called..." minlength="2" maxlength="24"></div>
+                <label>📧 Email</label><input type="email" id="authEmail" required>
+                <label>🔒 Password</label><input type="password" id="authPassword" minlength="6" required>
                 <button type="submit" class="btn-primary" style="width:100%;margin-top:8px;" id="authSubmitBtn">⚡ Login</button>
             </form>
-            <p style="text-align:center;margin-top:12px;font-size:0.78rem;color:var(--text-dim);">
-                <span id="authToggleText">Don't have an account?</span>
-                <a style="color:#aeb9ff;cursor:pointer;font-weight:600;" id="authToggleLink" onclick="toggleAuthMode()">Register here</a>
+            <p style="text-align:center;margin-top:12px;font-size:0.78rem;color:#aaa;">
+                <span id="authToggleText">Don't have an account?</span> <a style="color:#aeb9ff;cursor:pointer;font-weight:600;" id="authToggleLink" onclick="toggleAuthMode()">Register here</a>
             </p>
         </div>
     </div>
 
-    <!-- ==================== ADD TOOL/GUIDE MODAL ==================== -->
+    <!-- ADD/EDIT MODAL -->
     <div class="modal-overlay" id="addModalOverlay">
-        <div class="modal" id="addModal">
+        <div class="modal">
             <button class="close-btn" onclick="closeAddModal()">&times;</button>
             <h3>➕ Add New Entry</h3>
             <form id="addForm" autocomplete="off">
-                <label>Category</label>
-                <select id="addCategory" required>
-                    <option value="tools">Tools</option>
-                    <option value="guides">Guides</option>
-                </select>
-                <label>Subcategory</label>
-                <select id="addSubcategory" required></select>
-                <label>Name</label>
-                <input type="text" id="addName" placeholder="Entry name..." required maxlength="100">
-                <label>Tags (max 10, comma separated)</label>
-                <div class="tag-entry-row" id="tagEntryRow">
-                    <input type="text" id="tagInput" placeholder="Type a tag and press Enter..." style="flex:1;margin-bottom:0;">
+                <label>Category</label><select id="addCategory" required><option value="tools">Tools</option><option value="guides">Guides</option></select>
+                <label>Subcategory</label><select id="addSubcategory" required></select>
+                <label>Name</label><input type="text" id="addName" maxlength="100" required>
+                <label>Tags (comma separated, max 10)</label>
+                <div style="display:flex;gap:6px;margin-bottom:8px;">
+                    <input type="text" id="tagInput" placeholder="Type tag and press Enter" style="flex:1;">
                 </div>
                 <div id="tagsDisplay" style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;"></div>
-                <label>Preview Description (max 500 chars)</label>
-                <textarea id="addPreviewDesc" placeholder="Short preview shown on the banner..." maxlength="500" rows="2"></textarea>
+                <label>Preview Description (max 500)</label><textarea id="addPreviewDesc" maxlength="500" rows="2"></textarea>
                 <div class="char-counter" id="previewCharCount">0 / 500</div>
-                <label>Full Description (max 4000 chars)</label>
-                <textarea id="addFullDesc" placeholder="Detailed description shown on the full page..." maxlength="4000" rows="4"></textarea>
+                <label>Full Description (max 4000)</label><textarea id="addFullDesc" maxlength="4000" rows="4"></textarea>
                 <div class="char-counter" id="fullCharCount">0 / 4000</div>
-                <label>Links (optional)</label>
-                <div id="linksContainer"></div>
-                <button type="button" class="btn-secondary" style="width:100%;margin-bottom:10px;" id="addLinkBtn">+ Add Link</button>
+                <label>Image URL</label><input type="url" id="addImageUrl" placeholder="https://i.imgur.com/...">
+                <label>Links (name & url)</label><div id="linksContainer"></div>
+                <button type="button" class="btn-secondary" style="width:100%;margin-bottom:8px;" id="addLinkBtn">+ Add Link</button>
+                <div style="display:flex;align-items:center;gap:8px;margin:8px 0;">
+                    <input type="checkbox" id="addPaid"><label for="addPaid" style="margin:0;">Paid</label>
+                </div>
                 <button type="submit" class="btn-primary" style="width:100%;">✅ Submit</button>
             </form>
         </div>
     </div>
 
-    <!-- ==================== VIEW DETAIL MODAL ==================== -->
+    <!-- VIEW MODAL -->
     <div class="modal-overlay" id="viewModalOverlay">
-        <div class="modal" id="viewModal" style="max-width:650px;">
+        <div class="modal" id="viewModal">
             <button class="close-btn" onclick="closeViewModal()">&times;</button>
             <div id="viewModalContent"></div>
         </div>
     </div>
 
-    <!-- ==================== TOAST ==================== -->
-    <div id="toast" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a1a1a;border:1px solid #333;color:#fff;padding:12px 24px;border-radius:24px;font-size:0.82rem;z-index:999;display:none;pointer-events:none;transition:opacity 0.3s;"></div>
+    <div id="toast" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#1a1a1a;border:1px solid #333;color:#fff;padding:12px 24px;border-radius:24px;font-size:0.82rem;z-index:999;display:none;"></div>
 
-    <!-- ==================== FIREBASE SDK ==================== -->
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-        import { getDatabase, ref, set, get, push, update, onValue, serverTimestamp, remove, query as dbQuery, orderByChild, equalTo } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
+        import { getDatabase, ref, set, get, push, onValue, serverTimestamp, remove } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
 
         const firebaseConfig = {
             apiKey: "AIzaSyAEFAooiWJy3fPdQXV3RPVLMNppKyo4S94",
@@ -1013,79 +751,36 @@
             projectId: "robstein-b71f5",
             storageBucket: "robstein-b71f5.firebasestorage.app",
             messagingSenderId: "378067322754",
-            appId: "1:378067322754:web:7ab17b18893766189a719b",
-            measurementId: "G-BM8F42P5M7"
+            appId: "1:378067322754:web:7ab17b18893766189a719b"
         };
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getDatabase(app);
 
-        // ==================== GLOBAL STATE ====================
-        let currentUser = null;
-        let isModerator = false;
-        let activeMainTab = 'home';
-        let activeToolsSub = 'pve';
-        let activeGuidesSub = 'buildings';
-        let allToolsCache = [];
-        let allGuidesCache = [];
-        let homeAnimationsTriggered = false;
-        let countUpIntervals = {};
-        let isRegisterMode = false;
-        let pendingTags = [];
-        let pendingLinks = [];
+        // STATE
+        let currentUser = null, isModerator = false, activeMainTab = 'home';
+        let activeToolsSub = 'all', activeGuidesSub = 'all';
+        let allToolsCache = [], allGuidesCache = [];
+        let isRegisterMode = false, pendingTags = [], pendingLinks = [];
+        let toolsSearchMode = 'name', guidesSearchMode = 'name';
 
-        // ==================== DOM REFS ====================
-        const navRight = document.getElementById('navRight');
-        const loginBtn = document.getElementById('loginBtn');
-        const authModalOverlay = document.getElementById('authModalOverlay');
-        const authModalTitle = document.getElementById('authModalTitle');
-        const authError = document.getElementById('authError');
-        const authForm = document.getElementById('authForm');
-        const authSubmitBtn = document.getElementById('authSubmitBtn');
-        const authToggleText = document.getElementById('authToggleText');
-        const authToggleLink = document.getElementById('authToggleLink');
-        const usernameField = document.getElementById('usernameField');
-        const authUsername = document.getElementById('authUsername');
-        const authEmail = document.getElementById('authEmail');
-        const authPassword = document.getElementById('authPassword');
-        const addModalOverlay = document.getElementById('addModalOverlay');
-        const addForm = document.getElementById('addForm');
-        const addCategory = document.getElementById('addCategory');
-        const addSubcategory = document.getElementById('addSubcategory');
-        const addName = document.getElementById('addName');
-        const tagInput = document.getElementById('tagInput');
-        const tagsDisplay = document.getElementById('tagsDisplay');
-        const addPreviewDesc = document.getElementById('addPreviewDesc');
-        const addFullDesc = document.getElementById('addFullDesc');
-        const previewCharCount = document.getElementById('previewCharCount');
-        const fullCharCount = document.getElementById('fullCharCount');
-        const linksContainer = document.getElementById('linksContainer');
-        const addLinkBtn = document.getElementById('addLinkBtn');
-        const viewModalOverlay = document.getElementById('viewModalOverlay');
-        const viewModalContent = document.getElementById('viewModalContent');
-        const toast = document.getElementById('toast');
-        const toolsResults = document.getElementById('toolsResults');
-        const guidesResults = document.getElementById('guidesResults');
-        const toolsSearchInput = document.getElementById('toolsSearchInput');
-        const toolsPaidFilter = document.getElementById('toolsPaidFilter');
-        const guidesSearchInput = document.getElementById('guidesSearchInput');
-        const homeBigText = document.getElementById('homeBigText');
-        const homeSubtitle = document.getElementById('homeSubtitle');
-        const homeStatsRow = document.getElementById('homeStatsRow');
-        const statTools = document.getElementById('statTools');
-        const statGuides = document.getElementById('statGuides');
-        const statUsers = document.getElementById('statUsers');
-        const toolsSubDesc = document.getElementById('toolsSubDesc');
-        const guidesSubDesc = document.getElementById('guidesSubDesc');
+        // DOM
+        const $ = id => document.getElementById(id);
+        const toolsSubTabs = $('toolsSubTabs'), guidesSubTabs = $('guidesSubTabs');
+        const toolsSubDesc = $('toolsSubDesc'), guidesSubDesc = $('guidesSubDesc');
+        const toolsResults = $('toolsResults'), guidesResults = $('guidesResults');
+        const navRight = $('navRight');
 
-        const subDescriptionsTools = {
+        const subDescsTools = {
+            all: 'All tools across every category.',
             pve: 'Tools for PvE, farming mobs, looting structures, or just normal survival.',
             pvp: 'Tools for PvPing, fighting other players, or fighting on normal/HVH servers.',
             building: 'Tools for advanced and better building, or structuring.',
             multifunctional: 'Tools with combined capabilities, that can do PvE, PvP and building.'
         };
-        const subDescriptionsGuides = {
+        const subDescsGuides = {
+            all: 'All guides across every category.',
             buildings: 'Guides for constructing impressive buildings and structures.',
             farms: 'Guides for building efficient farms — crop, mob, or XP.',
             glitches: 'Guides covering game-breaking exploits, duplication glitches, and advanced mechanics.',
@@ -1093,727 +788,410 @@
             other: 'Miscellaneous guides that don\'t fit the other categories.'
         };
 
-        // ==================== TOAST ====================
-        function showToast(msg, duration = 2500) {
-            toast.textContent = msg;
-            toast.style.display = 'block';
-            toast.style.opacity = '1';
-            clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
-                toast.style.opacity = '0';
-                setTimeout(() => { toast.style.display = 'none'; }, 300);
-            }, duration);
-        }
+        // Toast
+        function toast(msg, d=2500){ const t=$('toast'); t.textContent=msg; t.style.display='block'; clearTimeout(t._t); t._t=setTimeout(()=>{t.style.display='none';},d); }
 
-        // ==================== AUTH MODAL ====================
-        function openAuthModal() {
-            authModalOverlay.classList.add('open');
-            authError.style.display = 'none';
-            authForm.reset();
-            updateAuthModeUI();
-        }
+        // Auth
+        function openAuthModal(){ $('authModalOverlay').classList.add('open'); }
+        function closeAuthModal(){ $('authModalOverlay').classList.remove('open'); }
+        window.openAuthModal=openAuthModal; window.closeAuthModal=closeAuthModal;
 
-        function closeAuthModal() {
-            authModalOverlay.classList.remove('open');
+        function toggleAuthMode(){ isRegisterMode=!isRegisterMode; updateAuthUI(); }
+        window.toggleAuthMode=toggleAuthMode;
+        function updateAuthUI(){
+            $('authModalTitle').textContent=isRegisterMode?'📝 Register':'🔑 Login';
+            $('authSubmitBtn').textContent=isRegisterMode?'✨ Create Account':'⚡ Login';
+            $('authToggleText').textContent=isRegisterMode?'Already have an account?':'Don\'t have an account?';
+            $('authToggleLink').textContent=isRegisterMode?'Login here':'Register here';
+            $('usernameField').style.display=isRegisterMode?'block':'none';
+            $('authUsername').required=isRegisterMode;
         }
-
-        function toggleAuthMode() {
-            isRegisterMode = !isRegisterMode;
-            updateAuthModeUI();
-            authError.style.display = 'none';
-        }
-
-        function updateAuthModeUI() {
-            if (isRegisterMode) {
-                authModalTitle.textContent = '📝 Register';
-                authSubmitBtn.textContent = '✨ Create Account';
-                authToggleText.textContent = 'Already have an account?';
-                authToggleLink.textContent = 'Login here';
-                usernameField.style.display = 'block';
-                authUsername.required = true;
-            } else {
-                authModalTitle.textContent = '🔑 Login';
-                authSubmitBtn.textContent = '⚡ Login';
-                authToggleText.textContent = "Don't have an account?";
-                authToggleLink.textContent = 'Register here';
-                usernameField.style.display = 'none';
-                authUsername.required = false;
-            }
-        }
-
-        authForm.addEventListener('submit', async (e) => {
+        $('authForm').addEventListener('submit', async (e)=>{
             e.preventDefault();
-            authError.style.display = 'none';
-            const email = authEmail.value.trim();
-            const password = authPassword.value;
-            const username = authUsername.value.trim();
-
-            try {
-                if (isRegisterMode) {
-                    if (!username || username.length < 2 || username.length > 24) {
-                        authError.textContent = 'Username must be 2-24 characters.';
-                        authError.style.display = 'block';
-                        return;
-                    }
-                    const userCred = await createUserWithEmailAndPassword(auth, email, password);
-                    await set(ref(db, 'users/' + userCred.user.uid), {
-                        username: username,
-                        email: email,
-                        createdAt: serverTimestamp()
-                    });
-                    showToast('✅ Account created! Welcome, ' + username + '!');
-                    closeAuthModal();
-                } else {
-                    await signInWithEmailAndPassword(auth, email, password);
-                    showToast('👋 Welcome back!');
-                    closeAuthModal();
+            const email=$('authEmail').value.trim(), password=$('authPassword').value;
+            try{
+                if(isRegisterMode){
+                    const uname=$('authUsername').value.trim();
+                    if(!uname||uname.length<2||uname.length>24) return toast('Username 2-24 chars.');
+                    const cred=await createUserWithEmailAndPassword(auth,email,password);
+                    await set(ref(db,'users/'+cred.user.uid),{username:uname,email,createdAt:serverTimestamp()});
+                    toast('✅ Account created!'); closeAuthModal();
+                }else{
+                    await signInWithEmailAndPassword(auth,email,password);
+                    toast('👋 Welcome back!'); closeAuthModal();
                 }
-            } catch (err) {
-                authError.textContent = err.message.replace('Firebase: ', '').replace(/\(auth\/.*\)/, '').trim();
-                authError.style.display = 'block';
-            }
+            }catch(err){ $('authError').textContent=err.message; $('authError').style.display='block'; }
         });
 
-        // ==================== AUTH STATE ====================
-        onAuthStateChanged(auth, async (user) => {
-            currentUser = user;
-            if (user) {
-                try {
-                    const sanitizedEmail = user.email.replace(/\./g, ',');
-                    const modSnap = await get(ref(db, 'moderators/' + sanitizedEmail));
-                    isModerator = modSnap.exists();
-                } catch (e) {
-                    isModerator = false; // silent fallback
-                }
-        
-                // Track daily active – safe, permission granted by new rules
-                try {
-                    const today = new Date().toISOString().split('T')[0];
-                    await set(ref(db, 'activeUsers/' + user.uid), { date: today, email: user.email, lastSeen: serverTimestamp() });
-                } catch (e) {
-                    console.warn('Active user tracking skipped:', e.message);
-                }
-        
-                const userSnap = await get(ref(db, 'users/' + user.uid));
-                const userData = userSnap.val() || {};
-                const displayName = userData.username || user.email.split('@')[0];
-                renderNavRight(displayName);
-            } else {
-                currentUser = null;
-                isModerator = false;
-                renderNavRight(null);
+        // Auth state
+        onAuthStateChanged(auth, async (user)=>{
+            currentUser=user;
+            if(user){
+                try{
+                    const sanitized=user.email.replace(/\./g,',');
+                    const snap=await get(ref(db,'moderators/'+sanitized));
+                    isModerator=snap.exists();
+                }catch{isModerator=false;}
+                try{
+                    const today=new Date().toISOString().split('T')[0];
+                    await set(ref(db,'activeUsers/'+user.uid),{date:today,email:user.email,lastSeen:serverTimestamp()});
+                }catch{}
+                const snap=await get(ref(db,'users/'+user.uid));
+                const data=snap.val()||{};
+                renderNavRight(data.username||user.email.split('@')[0]);
+            }else{
+                currentUser=null; isModerator=false; renderNavRight(null);
             }
-            refreshCurrentView();
+            refreshView();
         });
 
-        function renderNavRight(displayName) {
-            if (currentUser && displayName) {
-                let html = '<div class="user-info">';
-                if (isModerator) {
-                    html += '<span class="moderator-badge" title="Moderator">M</span>';
-                    html += '<button class="add-btn" title="Add new tool/guide" onclick="openAddModal()">+</button>';
-                }
-                html += `<span>👤 ${escapeHTML(displayName)}</span>`;
-                html += '<button class="logout-btn" onclick="doLogout()">Logout</button>';
-                html += '</div>';
-                navRight.innerHTML = html;
-            } else {
-                navRight.innerHTML = '<button class="login-btn" onclick="openAuthModal()">🔑 Login / Register</button>';
-            }
+        function renderNavRight(name){
+            if(currentUser && name){
+                let h='<div class="user-info">';
+                if(isModerator) h+='<span class="moderator-badge">M</span><button class="add-btn" onclick="openAddModal()">+</button>';
+                h+=`<span>👤 ${escapeHTML(name)}</span><button class="logout-btn" onclick="doLogout()">Logout</button></div>`;
+                navRight.innerHTML=h;
+            }else navRight.innerHTML='<button class="login-btn" onclick="openAuthModal()">🔑 Login / Register</button>';
         }
+        async function doLogout(){ await signOut(auth); toast('👋 Logged out.'); }
+        window.doLogout=doLogout;
 
-        async function doLogout() {
-            await signOut(auth);
-            showToast('👋 Logged out.');
-        }
+        function escapeHTML(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
 
-        function escapeHTML(str) {
-            const div = document.createElement('div');
-            div.textContent = str;
-            return div.innerHTML;
-        }
-
-        // ==================== DATA LISTENERS ====================
-        function setupDataListeners() {
-            onValue(ref(db, 'tools'), (snap) => {
-                const data = snap.val() || {};
-                allToolsCache = Object.entries(data).map(([id, val]) => ({ id, ...val }));
-                if (activeMainTab === 'tools') renderTools();
+        // Data listeners
+        function setupListeners(){
+            onValue(ref(db,'tools'), snap=>{
+                const d=snap.val()||{}; allToolsCache=Object.entries(d).map(([id,v])=>({id,...v}));
+                if(activeMainTab==='tools') renderTools();
             });
-            onValue(ref(db, 'guides'), (snap) => {
-                const data = snap.val() || {};
-                allGuidesCache = Object.entries(data).map(([id, val]) => ({ id, ...val }));
-                if (activeMainTab === 'guides') renderGuides();
-            });
-            // Stats listener
-            onValue(ref(db, 'tools'), (snap) => {
-                const count = snap.exists() ? Object.keys(snap.val()).length : 0;
-                statTools.setAttribute('data-target', count);
-                if (activeMainTab === 'home' && homeAnimationsTriggered) {
-                    statTools.textContent = count.toLocaleString();
-                }
-            });
-            onValue(ref(db, 'guides'), (snap) => {
-                const count = snap.exists() ? Object.keys(snap.val()).length : 0;
-                statGuides.setAttribute('data-target', count);
-                if (activeMainTab === 'home' && homeAnimationsTriggered) {
-                    statGuides.textContent = count.toLocaleString();
-                }
-            });
-            onValue(ref(db, 'activeUsers'), (snap) => {
-                const today = new Date().toISOString().split('T')[0];
-                let count = 0;
-                if (snap.exists()) {
-                    const users = snap.val();
-                    count = Object.values(users).filter(u => u.date === today).length;
-                }
-                statUsers.setAttribute('data-target', count);
-                if (activeMainTab === 'home' && homeAnimationsTriggered) {
-                    statUsers.textContent = count.toLocaleString();
-                }
+            onValue(ref(db,'guides'), snap=>{
+                const d=snap.val()||{}; allGuidesCache=Object.entries(d).map(([id,v])=>({id,...v}));
+                if(activeMainTab==='guides') renderGuides();
             });
         }
 
-        // ==================== TAB SWITCHING ====================
-        function switchTab(tab) {
-            if (activeMainTab === tab && tab === 'home' && homeAnimationsTriggered) {
-                triggerHomeAnimations();
-                return;
-            }
-            if (activeMainTab === tab && tab !== 'home') return;
-            activeMainTab = tab;
-            homeAnimationsTriggered = false;
-            clearAllCountUps();
-
-            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-            document.querySelector(`.nav-tab[data-tab="${tab}"]`)?.classList.add('active');
-            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
-
-            if (tab === 'home') {
-                document.getElementById('home-section').classList.add('active');
-                triggerHomeAnimations();
-            } else if (tab === 'tools') {
-                document.getElementById('tools-section').classList.add('active');
-                updateToolsUI();
+        // Tab switching
+        window.switchTab=function(tab){
+            if(activeMainTab===tab) return;
+            activeMainTab=tab;
+            document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));
+            document.querySelector(`.nav-tab[data-tab="${tab}"]`).classList.add('active');
+            document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));
+            if(tab==='home'){
+                $('home-section').classList.add('active');
+                animateHome();
+            }else if(tab==='tools'){
+                $('tools-section').classList.add('active');
                 renderTools();
-            } else if (tab === 'guides') {
-                document.getElementById('guides-section').classList.add('active');
-                updateGuidesUI();
+            }else{
+                $('guides-section').classList.add('active');
                 renderGuides();
             }
+        };
+
+        function refreshView(){
+            if(activeMainTab==='tools') renderTools();
+            else if(activeMainTab==='guides') renderGuides();
+            else animateHome();
         }
 
-        function refreshCurrentView() {
-            if (activeMainTab === 'tools') renderTools();
-            else if (activeMainTab === 'guides') renderGuides();
-            else if (activeMainTab === 'home') triggerHomeAnimations();
+        // Sub tabs rendering
+        function buildSubTabs(container, categories, current){
+            container.innerHTML = categories.map(cat=>{
+                const label = cat==='all'?'All':cat.charAt(0).toUpperCase()+cat.slice(1);
+                return `<button class="sub-tab${cat===current?' active':''}" data-sub="${cat}">${label}</button>`;
+            }).join('');
         }
 
-        // ==================== HOME ANIMATIONS ====================
-        function clearAllCountUps() {
-            Object.keys(countUpIntervals).forEach(k => {
-                clearInterval(countUpIntervals[k]);
-                delete countUpIntervals[k];
-            });
-        }
-
-        function animateCountUp(el, target, duration = 1400) {
-            const key = el.id;
-            if (countUpIntervals[key]) clearInterval(countUpIntervals[key]);
-            el.textContent = '0';
-            const start = 0;
-            const startTime = performance.now();
-
-            function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
-
-            function update(now) {
-                const elapsed = now - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                const val = Math.floor(start + (target - start) * easeOutCubic(progress));
-                el.textContent = val.toLocaleString();
-                if (progress < 1) {
-                    countUpIntervals[key] = requestAnimationFrame(update);
-                } else {
-                    el.textContent = target.toLocaleString();
-                    delete countUpIntervals[key];
-                }
-            }
-            countUpIntervals[key] = requestAnimationFrame(update);
-        }
-
-        function triggerHomeAnimations() {
-            clearAllCountUps();
-            homeBigText.classList.remove('visible');
-            homeSubtitle.classList.remove('visible');
-            homeStatsRow.classList.remove('visible');
-            void homeBigText.offsetWidth;
-            homeBigText.classList.add('visible');
-            homeSubtitle.classList.add('visible');
-            homeStatsRow.classList.add('visible');
-            setTimeout(() => {
-                const t = parseInt(statTools.getAttribute('data-target')) || 0;
-                const g = parseInt(statGuides.getAttribute('data-target')) || 0;
-                const u = parseInt(statUsers.getAttribute('data-target')) || 0;
-                animateCountUp(statTools, t, 1400);
-                animateCountUp(statGuides, g, 1400);
-                animateCountUp(statUsers, u, 1500);
-            }, 500);
-            homeAnimationsTriggered = true;
-        }
-
-        // ==================== TOOLS SUB-TABS ====================
-        function switchToolsSub(sub) {
-            activeToolsSub = sub;
-            updateToolsUI();
+        // Tools sub handlers
+        const toolSubs = ['all','pve','pvp','building','multifunctional'];
+        function switchToolsSub(sub){
+            activeToolsSub=sub;
+            buildSubTabs(toolsSubTabs, toolSubs, sub);
+            toolsSubDesc.textContent=subDescsTools[sub];
             renderTools();
-            toolsSearchInput.value = '';
-            toolsPaidFilter.value = 'all';
         }
+        window.switchToolsSub=switchToolsSub;
 
-        function updateToolsUI() {
-            document.querySelectorAll('#toolsSubTabs .sub-tab').forEach(t => t.classList.remove('active'));
-            document.querySelector(`#toolsSubTabs .sub-tab[data-sub="${activeToolsSub}"]`)?.classList.add('active');
-            toolsSubDesc.textContent = subDescriptionsTools[activeToolsSub] || '';
-        }
-
-        function renderTools() {
-            if (!currentUser) {
-                toolsResults.innerHTML = `<div class="login-prompt"><span class="icon-placeholder">🔒</span><p><strong>Login to view</strong> — top right button</p></div>`;
-                return;
-            }
-            const query = (toolsSearchInput.value || '').toLowerCase().trim();
-            const paidFilter = toolsPaidFilter.value;
-            let filtered = allToolsCache.filter(t => t.subcategory === activeToolsSub);
-            if (query) {
-                filtered = filtered.filter(t =>
-                    (t.name || '').toLowerCase().includes(query) ||
-                    (t.previewDesc || '').toLowerCase().includes(query) ||
-                    (t.tags || []).some(tag => tag.toLowerCase().includes(query))
-                );
-            }
-            if (paidFilter === 'yes') filtered = filtered.filter(t => t.paid === true);
-            if (paidFilter === 'no') filtered = filtered.filter(t => t.paid !== true);
-            renderBanners(filtered, toolsResults, 'tools');
-        }
-
-        // ==================== GUIDES SUB-TABS ====================
-        function switchGuidesSub(sub) {
-            activeGuidesSub = sub;
-            updateGuidesUI();
+        // Guides sub handlers
+        const guideSubs = ['all','buildings','farms','glitches','survival','other'];
+        function switchGuidesSub(sub){
+            activeGuidesSub=sub;
+            buildSubTabs(guidesSubTabs, guideSubs, sub);
+            guidesSubDesc.textContent=subDescsGuides[sub];
             renderGuides();
-            guidesSearchInput.value = '';
+        }
+        window.switchGuidesSub=switchGuidesSub;
+
+        // Build initial tabs
+        buildSubTabs(toolsSubTabs, toolSubs, 'all');
+        buildSubTabs(guidesSubTabs, guideSubs, 'all');
+        toolsSubDesc.textContent=subDescsTools.all;
+        guidesSubDesc.textContent=subDescsGuides.all;
+
+        // Click delegation for sub tabs
+        toolsSubTabs.addEventListener('click', e=>{ if(e.target.classList.contains('sub-tab')) switchToolsSub(e.target.dataset.sub); });
+        guidesSubTabs.addEventListener('click', e=>{ if(e.target.classList.contains('sub-tab')) switchGuidesSub(e.target.dataset.sub); });
+
+        // Search mode toggles
+        $('toolsSearchMode').addEventListener('click', e=>{
+            if(e.target.classList.contains('mode-btn')){
+                toolsSearchMode=e.target.dataset.mode;
+                $('toolsSearchMode').querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+                e.target.classList.add('active');
+                renderTools();
+            }
+        });
+        $('guidesSearchMode').addEventListener('click', e=>{
+            if(e.target.classList.contains('mode-btn')){
+                guidesSearchMode=e.target.dataset.mode;
+                $('guidesSearchMode').querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+                e.target.classList.add('active');
+                renderGuides();
+            }
+        });
+
+        // Render functions
+        function renderTools(){
+            if(!currentUser){ toolsResults.innerHTML='<div class="login-prompt">🔒 Login to view — top right button</div>'; return; }
+            const query=$('toolsSearchInput').value.trim().toLowerCase();
+            const paid=$('toolsPaidFilter').value;
+            let items=allToolsCache;
+            if(activeToolsSub!=='all') items=items.filter(i=>i.subcategory===activeToolsSub);
+            if(query){
+                if(toolsSearchMode==='name') items=items.filter(i=>(i.name||'').toLowerCase().includes(query)||(i.previewDesc||'').toLowerCase().includes(query));
+                else items=items.filter(i=>(i.tags||[]).some(t=>t.toLowerCase().includes(query)));
+            }
+            if(paid==='yes') items=items.filter(i=>i.paid===true);
+            if(paid==='no') items=items.filter(i=>i.paid!==true);
+            renderBanners(items, toolsResults, 'tools');
         }
 
-        function updateGuidesUI() {
-            document.querySelectorAll('#guidesSubTabs .sub-tab').forEach(t => t.classList.remove('active'));
-            document.querySelector(`#guidesSubTabs .sub-tab[data-sub="${activeGuidesSub}"]`)?.classList.add('active');
-            guidesSubDesc.textContent = subDescriptionsGuides[activeGuidesSub] || '';
+        function renderGuides(){
+            if(!currentUser){ guidesResults.innerHTML='<div class="login-prompt">🔒 Login to view — top right button</div>'; return; }
+            const query=$('guidesSearchInput').value.trim().toLowerCase();
+            let items=allGuidesCache;
+            if(activeGuidesSub!=='all') items=items.filter(i=>i.subcategory===activeGuidesSub);
+            if(query){
+                if(guidesSearchMode==='name') items=items.filter(i=>(i.name||'').toLowerCase().includes(query)||(i.previewDesc||'').toLowerCase().includes(query));
+                else items=items.filter(i=>(i.tags||[]).some(t=>t.toLowerCase().includes(query)));
+            }
+            renderBanners(items, guidesResults, 'guides');
         }
 
-        function renderGuides() {
-            if (!currentUser) {
-                guidesResults.innerHTML = `<div class="login-prompt"><span class="icon-placeholder">🔒</span><p><strong>Login to view</strong> — top right button</p></div>`;
-                return;
-            }
-            const query = (guidesSearchInput.value || '').toLowerCase().trim();
-            let filtered = allGuidesCache.filter(g => g.subcategory === activeGuidesSub);
-            if (query) {
-                filtered = filtered.filter(g =>
-                    (g.name || '').toLowerCase().includes(query) ||
-                    (g.previewDesc || '').toLowerCase().includes(query) ||
-                    (g.tags || []).some(tag => tag.toLowerCase().includes(query))
-                );
-            }
-            renderBanners(filtered, guidesResults, 'guides');
-        }
-
-        // ==================== RENDER BANNERS ====================
-        function renderBanners(items, container, type) {
-            if (items.length === 0) {
-                container.innerHTML = `<div class="results-empty">📦 No entries found in this category yet.</div>`;
-                return;
-            }
-            container.innerHTML = items.map(item => {
-                const ratings = item.ratings || {};
-                const ratingEntries = Object.values(ratings);
-                const totalRatings = ratingEntries.length;
-                const avgStars = totalRatings > 0 ? (ratingEntries.reduce((s, r) => s + (r.stars || 0), 0) /
-                    totalRatings) : 0;
-                const starsStr = '★'.repeat(Math.round(avgStars)) + '☆'.repeat(5 - Math.round(avgStars));
-                const tags = (item.tags || []).slice(0, 10);
-                const preview = (item.previewDesc || '').substring(0, 500);
+        function renderBanners(items, container, type){
+            if(!items.length){ container.innerHTML='<div style="color:#666;text-align:center;padding:40px;">📦 No entries found.</div>'; return; }
+            container.innerHTML=items.map(item=>{
+                const ratings=item.ratings||{};
+                const vals=Object.values(ratings);
+                const total=vals.length;
+                const avg=total?vals.reduce((s,r)=>s+(r.stars||0),0)/total:0;
+                const stars='★'.repeat(Math.round(avg))+'☆'.repeat(5-Math.round(avg));
+                const tags=(item.tags||[]).slice(0,10);
+                const preview=(item.previewDesc||'').substring(0,500);
                 return `
-                <div class="item-banner">
-                    <div class="item-name">${escapeHTML(item.name || 'Untitled')}</div>
-                    <div class="item-tags">${tags.map(t => `<span class="item-tag">#${escapeHTML(t)}</span>`).join('')}</div>
-                    <div class="item-preview">${escapeHTML(preview)}</div>
-                    <div class="item-footer">
-                        <div class="item-rating">
-                            <span class="stars">${starsStr}</span>
-                            <span class="count">(${totalRatings})</span>
+                <div class="item-banner" data-id="${item.id}" data-type="${type}">
+                    ${item.imageUrl ? `<img class="banner-image" src="${escapeHTML(item.imageUrl)}" alt="img">` : ''}
+                    <div class="banner-body">
+                        <div class="banner-name">${escapeHTML(item.name||'Untitled')}</div>
+                        <div class="banner-tags">${tags.map(t=>`<span class="banner-tag">#${escapeHTML(t)}</span>`).join('')}</div>
+                        <div class="banner-preview">${escapeHTML(preview)}</div>
+                        <div class="banner-footer">
+                            <div class="item-rating"><span>${stars}</span> <span style="color:#888;">(${total})</span></div>
+                            <button class="view-btn">View →</button>
                         </div>
-                        <button class="view-btn" data-id="${escapeHTML(item.id)}" data-type="${type}">View →</button>
                     </div>
                 </div>`;
             }).join('');
-
-            // Attach view button listeners
-            container.querySelectorAll('.view-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const id = btn.getAttribute('data-id');
-                    const typ = btn.getAttribute('data-type');
-                    const item = (typ === 'tools' ? allToolsCache : allGuidesCache).find(i => i
-                        .id === id);
-                    if (item) openViewModal(item, typ);
-                });
-            });
+            container.querySelectorAll('.item-banner').forEach(b=>b.addEventListener('click', function(e){
+                if(e.target.classList.contains('view-btn')) return;
+                const id=this.dataset.id, typ=this.dataset.type;
+                const item=(typ==='tools'?allToolsCache:allGuidesCache).find(i=>i.id===id);
+                if(item) openViewModal(item,typ);
+            }));
+            container.querySelectorAll('.view-btn').forEach(b=>b.addEventListener('click', function(e){
+                e.stopPropagation();
+                const banner=this.closest('.item-banner');
+                const id=banner.dataset.id, typ=banner.dataset.type;
+                const item=(typ==='tools'?allToolsCache:allGuidesCache).find(i=>i.id===id);
+                if(item) openViewModal(item,typ);
+            }));
         }
 
-        // ==================== VIEW MODAL ====================
-        function openViewModal(item, type) {
-            const ratings = item.ratings || {};
-            const ratingEntries = Object.values(ratings);
-            const totalRatings = ratingEntries.length;
-            const avgStars = totalRatings > 0 ? (ratingEntries.reduce((s, r) => s + (r.stars || 0), 0) / totalRatings) :
-            0;
-            const starsStr = '★'.repeat(Math.round(avgStars)) + '☆'.repeat(5 - Math.round(avgStars));
-            const userRating = currentUser ? ratings[currentUser.uid] : null;
-            const links = item.links || [];
-            const tags = (item.tags || []).slice(0, 10);
-
-            let html = `
-                <h3 style="font-size:1.3rem;font-weight:700;color:#fff;margin-bottom:4px;">${escapeHTML(item.name || 'Untitled')}</h3>
-                <div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;">${tags.map(t => `<span class="item-tag">#${escapeHTML(t)}</span>`).join('')}</div>
-                <div class="item-rating" style="margin-bottom:10px;">
-                    <span style="font-size:1.2rem;color:#fff;">${starsStr}</span>
-                    <span style="color:#aaa;font-size:0.8rem;">${avgStars.toFixed(1)} / 5 (${totalRatings} rating${totalRatings!==1?'s':''})</span>
-                </div>
-                <div style="background:#0a0a0a;border:1px solid #1a1a1a;border-radius:6px;padding:14px;margin-bottom:12px;font-size:0.85rem;line-height:1.7;color:#ccc;white-space:pre-wrap;">${escapeHTML(item.fullDesc || item.previewDesc || 'No description.')}</div>
-            `;
-
-            if (links.length > 0) {
-                html += `<div class="link-buttons-row">${links.map(l => `<a href="${escapeHTML(l.url)}" target="_blank" rel="noopener" class="link-btn">🔗 ${escapeHTML(l.name)}</a>`).join('')}</div>`;
-            }
-
-            // Rating section
-            html += `<hr style="border-color:#1a1a1a;margin:14px 0;">`;
-            html += `<p style="font-weight:600;color:#fff;margin-bottom:6px;">⭐ Rate this ${type === 'tools' ? 'tool' : 'guide'}</p>`;
-
-            if (userRating) {
-                html +=
-                    `<p style="color:#888;font-size:0.8rem;">You rated: ${'★'.repeat(userRating.stars)}${'☆'.repeat(5-userRating.stars)} (${userRating.stars}/5)</p>`;
-                if (userRating.comment) html +=
-                    `<p style="color:#666;font-size:0.75rem;">Your comment: "${escapeHTML(userRating.comment)}"</p>`;
-                html +=
-                    `<p style="color:#555;font-size:0.7rem;">You can only rate once. Rating locked.</p>`;
-            } else if (currentUser) {
-                html += `
-                    <div class="star-rating-interactive" id="starRatingInteractive">
-                        <span class="star" data-star="1">☆</span>
-                        <span class="star" data-star="2">☆</span>
-                        <span class="star" data-star="3">☆</span>
-                        <span class="star" data-star="4">☆</span>
-                        <span class="star" data-star="5">☆</span>
-                    </div>
-                    <p id="selectedStarLabel" style="color:#888;font-size:0.75rem;margin-top:4px;">Click a star to rate</p>
-                    <div class="comment-entry">
-                        <textarea id="ratingComment" placeholder="Optional comment..."></textarea>
-                        <button class="btn-primary" id="submitRatingBtn" style="width:auto;padding:8px 18px;font-size:0.78rem;" disabled>Submit Rating</button>
-                    </div>
-                `;
-            } else {
-                html += `<p style="color:#666;font-size:0.8rem;">Login to rate this entry.</p>`;
-            }
-
-            // Comments list
-            if (ratingEntries.length > 0) {
-                html += `<div class="comments-list"><p style="font-weight:600;color:#fff;margin-bottom:6px;">💬 Comments</p>`;
-                ratingEntries.forEach(r => {
-                    if (r.comment) {
-                        html +=
-                            `<div class="comment-item"><strong>${escapeHTML(r.username || 'Anonymous')}</strong> <span class="comment-stars">${'★'.repeat(r.stars)}</span><br>${escapeHTML(r.comment)}</div>`;
-                    }
-                });
-                html += `</div>`;
-            }
-
-            viewModalContent.innerHTML = html;
-            viewModalOverlay.classList.add('open');
-
-            // Rating interaction
-            if (currentUser && !userRating) {
-                const starsContainer = document.getElementById('starRatingInteractive');
-                const starLabel = document.getElementById('selectedStarLabel');
-                const submitBtn = document.getElementById('submitRatingBtn');
-                const commentTextarea = document.getElementById('ratingComment');
-                let selectedStar = 0;
-
-                if (starsContainer) {
-                    starsContainer.querySelectorAll('.star').forEach(star => {
-                        star.addEventListener('mouseenter', () => {
-                            const val = parseInt(star.getAttribute('data-star'));
-                            starsContainer.querySelectorAll('.star').forEach((s, i) => {
-                                s.textContent = i < val ? '★' : '☆';
-                                s.classList.toggle('hover', i < val);
-                            });
-                        });
-                        star.addEventListener('mouseleave', () => {
-                            starsContainer.querySelectorAll('.star').forEach((s,
-                                i) => {
-                                s.textContent = i < selectedStar ? '★' : '☆';
-                                s.classList.toggle('selected', i <
-                                    selectedStar);
-                                s.classList.remove('hover');
-                            });
-                        });
-                        star.addEventListener('click', () => {
-                            selectedStar = parseInt(star.getAttribute(
-                                'data-star'));
-                            starsContainer.querySelectorAll('.star').forEach(
-                                (s, i) => {
-                                    s.textContent = i < selectedStar ?
-                                        '★' : '☆';
-                                    s.classList.toggle('selected', i <
-                                        selectedStar);
-                                });
-                            starLabel.textContent =
-                                `Selected: ${selectedStar} / 5 stars`;
-                            submitBtn.disabled = false;
-                        });
-                    });
-                }
-
-                submitBtn?.addEventListener('click', async () => {
-                    if (selectedStar === 0) return;
-                    const comment = commentTextarea?.value.trim() || '';
-                    const userSnap = await get(ref(db, 'users/' + currentUser.uid));
-                    const uname = (userSnap.val() || {}).username || currentUser.email.split('@')[0];
-                    const ratingData = {
-                        stars: selectedStar,
-                        comment: comment,
-                        username: uname,
-                        createdAt: serverTimestamp()
-                    };
-                    const ratingPath = type === 'tools' ? `tools/${item.id}/ratings/${currentUser.uid}` :
-                        `guides/${item.id}/ratings/${currentUser.uid}`;
-                    await set(ref(db, ratingPath), ratingData);
-                    showToast('✅ Rating submitted!');
-                    // Refresh the view modal
-                    const snap = await get(ref(db, (type === 'tools' ? 'tools/' : 'guides/') + item.id));
-                    if (snap.exists()) openViewModal({ id: item.id, ...snap.val() }, type);
+        // View modal
+        function openViewModal(item, type){
+            const ratings=item.ratings||{};
+            const vals=Object.values(ratings);
+            const total=vals.length;
+            const avg=total?vals.reduce((s,r)=>s+(r.stars||0),0)/total:0;
+            const stars='★'.repeat(Math.round(avg))+'☆'.repeat(5-Math.round(avg));
+            const userRating=currentUser?ratings[currentUser.uid]:null;
+            const tags=(item.tags||[]).slice(0,10);
+            let html=`
+                <h3 style="font-size:1.3rem;">${escapeHTML(item.name)}</h3>
+                ${item.imageUrl?`<img src="${escapeHTML(item.imageUrl)}" style="max-width:100%;max-height:300px;border-radius:8px;margin:10px 0;">`:''}
+                <div style="display:flex;gap:4px;margin-bottom:8px;">${tags.map(t=>`<span class="banner-tag">#${escapeHTML(t)}</span>`).join('')}</div>
+                <div class="item-rating" style="margin-bottom:10px;">${stars} ${avg.toFixed(1)}/5 (${total})</div>
+                <div style="background:#0a0a0a;padding:12px;border-radius:6px;margin:10px 0;white-space:pre-wrap;">${escapeHTML(item.fullDesc||item.previewDesc||'')}</div>
+                ${item.links&&item.links.length?`<div style="display:flex;gap:6px;flex-wrap:wrap;">${item.links.map(l=>`<a href="${escapeHTML(l.url)}" target="_blank" class="btn-secondary" style="text-decoration:none;">🔗 ${escapeHTML(l.name)}</a>`).join('')}</div>`:''}
+                <hr style="border-color:#1a1a1a;margin:14px 0;">
+                <p style="font-weight:600;">⭐ Rate this ${type}</p>`;
+            if(userRating){
+                html+=`<p>You rated: ${'★'.repeat(userRating.stars)}${'☆'.repeat(5-userRating.stars)}</p>`;
+            }else if(currentUser){
+                html+=`<div class="star-rating-interactive" id="starRating"><span class="star" data-v="1">☆</span><span class="star" data-v="2">☆</span><span class="star" data-v="3">☆</span><span class="star" data-v="4">☆</span><span class="star" data-v="5">☆</span></div>
+                <textarea id="ratingComment" placeholder="Optional comment" style="width:100%;margin:8px 0;"></textarea>
+                <button class="btn-primary" id="submitRating" disabled>Submit</button>`;
+            }else html+='<p>Login to rate.</p>';
+            $('viewModalContent').innerHTML=html;
+            $('viewModalOverlay').classList.add('open');
+            if(!userRating&&currentUser){
+                let sel=0;
+                const starsEl=$('starRating');
+                starsEl.addEventListener('mouseover',function(e){ if(e.target.classList.contains('star')){ const v=+e.target.dataset.v; starsEl.querySelectorAll('.star').forEach((s,i)=>{s.textContent=i<v?'★':'☆'; s.classList.toggle('hover',i<v);}); }});
+                starsEl.addEventListener('mouseleave',()=>{ starsEl.querySelectorAll('.star').forEach((s,i)=>{s.textContent=i<sel?'★':'☆'; s.classList.remove('hover');}); });
+                starsEl.addEventListener('click',function(e){ if(e.target.classList.contains('star')){ sel=+e.target.dataset.v; starsEl.querySelectorAll('.star').forEach((s,i)=>{s.textContent=i<sel?'★':'☆'; s.classList.toggle('selected',i<sel);}); $('submitRating').disabled=false; }});
+                $('submitRating').addEventListener('click',async()=>{
+                    const comment=$('ratingComment').value.trim().substring(0,500);
+                    const snap=await get(ref(db,'users/'+currentUser.uid));
+                    const uname=(snap.val()||{}).username||currentUser.email.split('@')[0];
+                    const ratingData={stars:sel,comment,username:uname,createdAt:serverTimestamp()};
+                    const path=type==='tools'?`tools/${item.id}/ratings/${currentUser.uid}`:`guides/${item.id}/ratings/${currentUser.uid}`;
+                    await set(ref(db,path),ratingData);
+                    toast('✅ Rating submitted!'); closeViewModal();
                 });
             }
         }
+        function closeViewModal(){ $('viewModalOverlay').classList.remove('open'); }
+        window.closeViewModal=closeViewModal;
 
-        function closeViewModal() {
-            viewModalOverlay.classList.remove('open');
-            viewModalContent.innerHTML = '';
-        }
-
-        // ==================== ADD MODAL ====================
-        function openAddModal() {
-            if (!isModerator) {
-                showToast('❌ Only moderators can add entries.');
-                return;
-            }
-            pendingTags = [];
-            pendingLinks = [];
-            addForm.reset();
-            tagsDisplay.innerHTML = '';
-            linksContainer.innerHTML = '';
-            previewCharCount.textContent = '0 / 500';
-            fullCharCount.textContent = '0 / 4000';
+        // Add modal
+        window.openAddModal=function(){
+            if(!isModerator) return toast('❌ Moderator only.');
+            pendingTags=[]; pendingLinks=[];
+            $('addForm').reset();
+            $('tagsDisplay').innerHTML=''; $('linksContainer').innerHTML='';
             updateAddSubcategories();
-            addModalOverlay.classList.add('open');
+            $('addModalOverlay').classList.add('open');
+        };
+        function closeAddModal(){ $('addModalOverlay').classList.remove('open'); }
+        window.closeAddModal=closeAddModal;
+
+        function updateAddSubcategories(){
+            const cat=$('addCategory').value;
+            const subs=cat==='tools'?['pve','pvp','building','multifunctional']:['buildings','farms','glitches','survival','other'];
+            $('addSubcategory').innerHTML=subs.map(s=>`<option value="${s}">${s.charAt(0).toUpperCase()+s.slice(1)}</option>`).join('');
         }
+        $('addCategory').addEventListener('change',updateAddSubcategories);
 
-        function closeAddModal() {
-            addModalOverlay.classList.remove('open');
-        }
-
-        function updateAddSubcategories() {
-            const cat = addCategory.value;
-            addSubcategory.innerHTML = '';
-            const subs = cat === 'tools' ?
-                ['pve', 'pvp', 'building', 'multifunctional'] :
-                ['buildings', 'farms', 'glitches', 'survival', 'other'];
-            subs.forEach(s => {
-                const opt = document.createElement('option');
-                opt.value = s;
-                opt.textContent = s.charAt(0).toUpperCase() + s.slice(1);
-                addSubcategory.appendChild(opt);
-            });
-        }
-
-        addCategory.addEventListener('change', updateAddSubcategories);
-
-        // Tags
-        tagInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
+        $('tagInput').addEventListener('keydown',function(e){
+            if(e.key==='Enter'){
                 e.preventDefault();
-                const val = tagInput.value.trim();
-                if (val && pendingTags.length < 10 && !pendingTags.includes(val)) {
+                const val=this.value.trim();
+                if(val && pendingTags.length<10 && !pendingTags.includes(val)){
                     pendingTags.push(val);
                     renderTagPills();
                 }
-                tagInput.value = '';
+                this.value='';
             }
         });
-
-        function renderTagPills() {
-            tagsDisplay.innerHTML = pendingTags.map((t, i) =>
-                `<span class="tag-pill">#${escapeHTML(t)} <span class="remove-tag" data-idx="${i}">×</span></span>`
-            ).join('');
-            tagsDisplay.querySelectorAll('.remove-tag').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const idx = parseInt(btn.getAttribute('data-idx'));
-                    pendingTags.splice(idx, 1);
-                    renderTagPills();
-                });
-            });
+        function renderTagPills(){
+            $('tagsDisplay').innerHTML=pendingTags.map((t,i)=>`<span class="banner-tag" style="cursor:pointer;">#${escapeHTML(t)} <span data-idx="${i}" style="color:red;">×</span></span>`).join('');
+            $('tagsDisplay').querySelectorAll('span[data-idx]').forEach(s=>s.addEventListener('click',function(){
+                pendingTags.splice(+this.dataset.idx,1); renderTagPills();
+            }));
         }
 
-        // Links
-        function addLinkEntry(name = '', url = '') {
-            const idx = pendingLinks.length;
-            pendingLinks.push({ name, url });
-            const div = document.createElement('div');
-            div.className = 'link-entry';
-            div.innerHTML = `
-                <input type="text" placeholder="Link name" value="${escapeHTML(name)}" data-idx="${idx}" class="link-name-input" style="flex:1;">
-                <input type="url" placeholder="https://..." value="${escapeHTML(url)}" data-idx="${idx}" class="link-url-input" style="flex:2;">
-                <button type="button" data-idx="${idx}" class="remove-link-btn">✕</button>
-            `;
-            linksContainer.appendChild(div);
-            div.querySelector('.remove-link-btn').addEventListener('click', () => {
-                pendingLinks.splice(idx, 1);
-                div.remove();
-                refreshLinkIndices();
-            });
-            div.querySelector('.link-name-input').addEventListener('input', function() {
-                pendingLinks[parseInt(this.getAttribute('data-idx'))].name = this.value;
-            });
-            div.querySelector('.link-url-input').addEventListener('input', function() {
-                pendingLinks[parseInt(this.getAttribute('data-idx'))].url = this.value;
-            });
+        function addLinkEntry(name='',url=''){
+            const idx=pendingLinks.length;
+            pendingLinks.push({name,url});
+            const div=document.createElement('div'); div.className='link-entry'; div.style.display='flex'; div.style.gap='6px'; div.style.marginBottom='6px';
+            div.innerHTML=`<input placeholder="Name" value="${escapeHTML(name)}" class="link-name" style="flex:1;"><input placeholder="URL" value="${escapeHTML(url)}" class="link-url" style="flex:2;"><button type="button" class="remove-link-btn">✕</button>`;
+            $('linksContainer').appendChild(div);
+            div.querySelector('.remove-link-btn').addEventListener('click',()=>{ pendingLinks.splice(idx,1); div.remove(); });
+            div.querySelector('.link-name').addEventListener('input',function(){ pendingLinks[idx].name=this.value; });
+            div.querySelector('.link-url').addEventListener('input',function(){ pendingLinks[idx].url=this.value; });
         }
+        $('addLinkBtn').addEventListener('click',()=>addLinkEntry());
 
-        function refreshLinkIndices() {
-            const entries = linksContainer.querySelectorAll('.link-entry');
-            entries.forEach((entry, i) => {
-                entry.querySelector('.link-name-input').setAttribute('data-idx', i);
-                entry.querySelector('.link-url-input').setAttribute('data-idx', i);
-                entry.querySelector('.remove-link-btn').setAttribute('data-idx', i);
-            });
-        }
-
-        addLinkBtn.addEventListener('click', () => addLinkEntry());
-
-        // Char counters
-        addPreviewDesc.addEventListener('input', () => {
-            const len = addPreviewDesc.value.length;
-            previewCharCount.textContent = `${len} / 500`;
-            previewCharCount.classList.toggle('over', len > 500);
-        });
-        addFullDesc.addEventListener('input', () => {
-            const len = addFullDesc.value.length;
-            fullCharCount.textContent = `${len} / 4000`;
-            fullCharCount.classList.toggle('over', len > 4000);
-        });
-
-        // Submit add form
-        addForm.addEventListener('submit', async (e) => {
+        $('addForm').addEventListener('submit',async(e)=>{
             e.preventDefault();
-            if (!isModerator) return;
-            const category = addCategory.value;
-            const subcategory = addSubcategory.value;
-            const name = addName.value.trim();
-            const previewDesc = addPreviewDesc.value.trim().substring(0, 500);
-            const fullDesc = addFullDesc.value.trim().substring(0, 4000);
-            const tags = [...pendingTags];
-            const links = [...pendingLinks].filter(l => l.name && l.url);
-
-            if (!name) { showToast('❌ Name is required.'); return; }
-            if (!previewDesc) { showToast('❌ Preview description is required.'); return; }
-
-            const userSnap = await get(ref(db, 'users/' + currentUser.uid));
-            const uname = (userSnap.val() || {}).username || currentUser.email.split('@')[0];
-
-            const entryData = {
-                name,
-                tags,
-                previewDesc,
-                fullDesc,
-                links,
-                category,
-                subcategory,
-                paid: false,
-                addedBy: currentUser.uid,
-                addedByUsername: uname,
-                createdAt: serverTimestamp(),
-                ratings: {}
-            };
-
-            const path = category === 'tools' ? 'tools' : 'guides';
-            await push(ref(db, path), entryData);
-            showToast('✅ Entry added successfully!');
-            closeAddModal();
+            const category=$('addCategory').value, sub=$('addSubcategory').value;
+            const name=$('addName').value.trim();
+            const preview=$('addPreviewDesc').value.substring(0,500);
+            const full=$('addFullDesc').value.substring(0,4000);
+            const imageUrl=$('addImageUrl').value.trim();
+            const paid=$('addPaid').checked;
+            const links=[...pendingLinks].filter(l=>l.name&&l.url);
+            if(!name||!preview) return toast('Name and preview required.');
+            const snap=await get(ref(db,'users/'+currentUser.uid));
+            const uname=(snap.val()||{}).username||currentUser.email.split('@')[0];
+            const entry={name,tags:[...pendingTags],previewDesc:preview,fullDesc:full,imageUrl,links,paid,subcategory:sub,category,addedBy:currentUser.uid,addedByUsername:uname,createdAt:serverTimestamp(),ratings:{}};
+            await push(ref(db,category==='tools'?'tools':'guides'),entry);
+            toast('✅ Added!'); closeAddModal();
         });
 
-        // ==================== SEARCH HANDLERS ====================
-        toolsSearchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') renderTools(); });
-        toolsPaidFilter.addEventListener('change', () => renderTools());
-        document.getElementById('toolsSearchBtn').addEventListener('click', () => renderTools());
-        guidesSearchInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') renderGuides(); });
-        document.getElementById('guidesSearchBtn').addEventListener('click', () => renderGuides());
+        // Character counters
+        $('addPreviewDesc').addEventListener('input',()=>$('previewCharCount').textContent=`${$('addPreviewDesc').value.length} / 500`);
+        $('addFullDesc').addEventListener('input',()=>$('fullCharCount').textContent=`${$('addFullDesc').value.length} / 4000`);
 
-        // ==================== SUB-TAB CLICK HANDLERS ====================
-        document.getElementById('toolsSubTabs').addEventListener('click', (e) => {
-            if (e.target.classList.contains('sub-tab')) {
-                switchToolsSub(e.target.getAttribute('data-sub'));
-            }
-        });
-        document.getElementById('guidesSubTabs').addEventListener('click', (e) => {
-            if (e.target.classList.contains('sub-tab')) {
-                switchGuidesSub(e.target.getAttribute('data-sub'));
-            }
-        });
+        // Search triggers
+        $('toolsSearchInput').addEventListener('keydown',e=>{if(e.key==='Enter')renderTools();});
+        $('toolsPaidFilter').addEventListener('change',renderTools);
+        $('toolsSearchBtn').addEventListener('click',renderTools);
+        $('guidesSearchInput').addEventListener('keydown',e=>{if(e.key==='Enter')renderGuides();});
+        $('guidesSearchBtn').addEventListener('click',renderGuides);
 
-        // ==================== NAV TAB CLICK HANDLERS ====================
-        document.querySelector('.nav-tabs').addEventListener('click', (e) => {
-            if (e.target.classList.contains('nav-tab')) {
-                switchTab(e.target.getAttribute('data-tab'));
-            }
-        });
-
-        // ==================== MODAL OVERLAY CLICK ====================
-        authModalOverlay.addEventListener('click', (e) => { if (e.target === authModalOverlay) closeAuthModal(); });
-        addModalOverlay.addEventListener('click', (e) => { if (e.target === addModalOverlay) closeAddModal(); });
-        viewModalOverlay.addEventListener('click', (e) => { if (e.target === viewModalOverlay) closeViewModal(); });
-
-        // ==================== GLOBAL EXPOSURE ====================
-        window.switchTab = switchTab;
-        window.switchToolsSub = switchToolsSub;
-        window.switchGuidesSub = switchGuidesSub;
-        window.openAuthModal = openAuthModal;
-        window.closeAuthModal = closeAuthModal;
-        window.toggleAuthMode = toggleAuthMode;
-        window.doLogout = doLogout;
-        window.openAddModal = openAddModal;
-        window.closeAddModal = closeAddModal;
-        window.closeViewModal = closeViewModal;
-
-        // ==================== INIT ====================
-        function init() {
-            setupDataListeners();
-            updateAddSubcategories();
-            document.getElementById('home-section').classList.add('active');
-            triggerHomeAnimations();
-            toolsSubDesc.textContent = subDescriptionsTools[activeToolsSub];
-            guidesSubDesc.textContent = subDescriptionsGuides[activeGuidesSub];
+        // Home animations
+        function animateHome(){
+            const big=$('homeBigText');
+            big.style.opacity='1';
+            big.classList.add('flicker');
+            setTimeout(()=>big.classList.remove('flicker'),600);
+            $('homeSubtitle').classList.add('visible');
+            $('homeStatsRow').classList.add('visible');
+            animateCounters();
         }
+        function animateCounters(){
+            const ids=['statTools','statGuides','statUsers'];
+            ids.forEach(id=>{
+                const el=$(id);
+                const target=+el.getAttribute('data-target')||0;
+                rollNumber(el, target);
+            });
+        }
+        function rollNumber(el, target, duration=1200){
+            const start=0;
+            const startTime=performance.now();
+            function update(now){
+                const progress=Math.min((now-startTime)/duration,1);
+                const current=Math.floor(start+(target-start)*progress);
+                el.textContent=current.toLocaleString();
+                if(progress<1) requestAnimationFrame(update);
+                else el.textContent=target.toLocaleString();
+            }
+            requestAnimationFrame(update);
+        }
+        // Stats listener
+        onValue(ref(db,'tools'), snap=>{ const c=snap.exists()?Object.keys(snap.val()).length:0; $('statTools').setAttribute('data-target',c); if(activeMainTab==='home') rollNumber($('statTools'),c); });
+        onValue(ref(db,'guides'), snap=>{ const c=snap.exists()?Object.keys(snap.val()).length:0; $('statGuides').setAttribute('data-target',c); if(activeMainTab==='home') rollNumber($('statGuides'),c); });
+        onValue(ref(db,'activeUsers'), snap=>{
+            const today=new Date().toISOString().split('T')[0];
+            let count=0;
+            if(snap.exists()) Object.values(snap.val()).forEach(u=>{ if(u.date===today) count++; });
+            $('statUsers').setAttribute('data-target',count);
+            if(activeMainTab==='home') rollNumber($('statUsers'),count);
+        });
 
-        init();
+        // Init
+        setupListeners();
+        updateAddSubcategories();
+        animateHome();
+        window.addEventListener('click',function(e){
+            if(e.target===$('authModalOverlay')) closeAuthModal();
+            if(e.target===$('addModalOverlay')) closeAddModal();
+            if(e.target===$('viewModalOverlay')) closeViewModal();
+        });
     </script>
 </body>
 </html>
