@@ -22,14 +22,9 @@
             --danger: #c0392b;
             --moderator: #c0392b;
             --add-green: #27ae60;
-            --star-active: #fff;
             --radius: 6px;
             --font: 'Inter', 'Segoe UI', system-ui, sans-serif;
             --base-font: 0.95rem;
-            --tiny: 0.7rem;
-            --small: 0.82rem;
-            --medium: 0.92rem;
-            --large: 1.05rem;
         }
 
         * {
@@ -216,7 +211,6 @@
             from { opacity: 0; } to { opacity: 1; }
         }
 
-        /* Homepage – keep original sizing */
         #home-section {
             justify-content: center;
             align-items: center;
@@ -300,7 +294,6 @@
             font-weight: 500;
         }
 
-        /* Tools & Guides – larger text */
         #tools-section,
         #guides-section {
             padding: 28px 28px 40px;
@@ -476,16 +469,6 @@
             color: var(--text-dim);
             line-height: 1.5;
         }
-        .banner-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: auto;
-        }
-        .item-rating {
-            font-size: 0.85rem;
-            color: #ddd;
-        }
         .view-btn {
             padding: 8px 18px;
             background: #111;
@@ -495,7 +478,9 @@
             cursor: pointer;
             font-size: 0.85rem;
             font-weight: 600;
+            align-self: flex-end;
         }
+
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -577,7 +562,6 @@
             cursor: pointer;
             font-weight: 700;
             font-size: 0.9rem;
-            letter-spacing: 0.3px;
             transition: 0.2s;
         }
         .btn-primary:hover {
@@ -605,17 +589,6 @@
             margin-top: -8px;
             margin-bottom: 10px;
         }
-        .star-rating-interactive .star {
-            font-size: 2.2rem;
-            color: #333;
-            cursor: pointer;
-            transition: 0.1s;
-        }
-        .star-rating-interactive .star.hover,
-        .star-rating-interactive .star.selected {
-            color: #fff;
-        }
-        /* PFP Editor */
         .pfp-editor {
             display: flex;
             flex-direction: column;
@@ -672,20 +645,20 @@
 <body>
 
     <nav class="top-nav">
-        <div class="nav-brand">MCTG 😈︎ <span>— Minecraft tools &amp; guides</span></div>
+        <div class="nav-brand">MCTG <span>— Minecraft tools &amp; guides</span></div>
         <div class="nav-tabs">
             <button class="nav-tab active" data-tab="home">Home</button>
             <button class="nav-tab" data-tab="tools">Tools</button>
             <button class="nav-tab" data-tab="guides">Guides</button>
         </div>
         <div class="nav-right" id="navRight">
-            <button class="login-btn" onclick="openAuthModal()">🔑 Login / Register</button>
+            <button class="login-btn" onclick="openAuthModal()">🔑 Login</button>
         </div>
     </nav>
 
     <div class="main-content">
         <section class="page-section active" id="home-section">
-            <h1 class="home-big-text" id="homeBigText">MCTG 😈︎</h1>
+            <h1 class="home-big-text" id="homeBigText">MCTG</h1>
             <p class="home-subtitle" id="homeSubtitle">This is the homepage of MCTG, a place where you can find any tool for any purpose, or any guide for anything for Minecraft, welcome.</p>
             <div class="home-stats-row" id="homeStatsRow">
                 <div class="stat-card"><div class="stat-number" id="statTools">0</div><div class="stat-label">Total Tools</div></div>
@@ -724,27 +697,17 @@
         </section>
     </div>
 
-    <!-- AUTH MODAL -->
+    <!-- LOGIN MODAL (only password) -->
     <div class="modal-overlay" id="authModalOverlay">
         <div class="modal">
             <button class="close-btn" onclick="closeAuthModal()">&times;</button>
-            <h3 id="authModalTitle">🔑 Login</h3>
+            <h3>🔑 Enter Password</h3>
             <div id="authError" style="color:#e74c3c;font-size:0.85rem;margin-bottom:10px;display:none;"></div>
             <form id="authForm" autocomplete="off">
-                <div id="usernameField" style="display:none;">
-                    <label for="authUsername">👤 Username</label>
-                    <input type="text" id="authUsername" placeholder="How you want to be called..." minlength="2" maxlength="24">
-                </div>
-                <label for="authEmail">📧 Email</label>
-                <input type="email" id="authEmail" required>
-                <label for="authPassword">🔒 Password</label>
-                <input type="password" id="authPassword" minlength="6" required>
-                <button type="submit" class="btn-primary" style="width:100%;margin-top:8px;" id="authSubmitBtn">⚡ Login</button>
+                <label for="authPassword">Password</label>
+                <input type="password" id="authPassword" placeholder="Enter the access password" minlength="1" required>
+                <button type="submit" class="btn-primary" style="width:100%;margin-top:12px;">⚡ Login</button>
             </form>
-            <p style="text-align:center;margin-top:12px;font-size:0.82rem;color:#bbb;">
-                <span id="authToggleText">Don't have an account?</span> 
-                <a style="color:#aeb9ff;cursor:pointer;font-weight:600;" id="authToggleLink" onclick="toggleAuthMode()">Register here</a>
-            </p>
         </div>
     </div>
 
@@ -810,7 +773,7 @@
         </div>
     </div>
 
-    <!-- VIEW MODAL -->
+    <!-- VIEW MODAL (no ratings) -->
     <div class="modal-overlay" id="viewModalOverlay">
         <div class="modal" id="viewModal">
             <button class="close-btn" onclick="closeViewModal()">&times;</button>
@@ -822,7 +785,7 @@
 
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
         import { getDatabase, ref, set, get, push, onValue, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js';
 
         const firebaseConfig = {
@@ -839,10 +802,14 @@
         const auth = getAuth(app);
         const db = getDatabase(app);
 
+        // Hardcoded emails - change passwords in Firebase Auth console
+        const GUEST_EMAIL = "guest.login@mctg.fake";
+        const MODERATOR_EMAIL = "moderator.login@mctg.fake";
+
         let currentUser = null, isModerator = false, activeMainTab = 'home';
         let activeToolsSub = 'all', activeGuidesSub = 'all';
         let allToolsCache = [], allGuidesCache = [];
-        let isRegisterMode = false, pendingTags = [], pendingLinks = [];
+        let pendingTags = [], pendingLinks = [];
         let toolsSearchMode = 'name', guidesSearchMode = 'name';
         let pfpCrop = { x: 50, y: 50, zoom: 150 };
 
@@ -870,87 +837,88 @@
 
         function toast(msg, d=2500){ const t=$('toast'); t.textContent=msg; t.style.display='block'; clearTimeout(t._t); t._t=setTimeout(()=>{t.style.display='none';},d); }
 
+        // --- Auth Modal (only password) ---
         window.openAuthModal = () => $('authModalOverlay').classList.add('open');
-        window.closeAuthModal = () => $('authModalOverlay').classList.remove('open');
-        window.toggleAuthMode = () => { isRegisterMode = !isRegisterMode; updateAuthUI(); };
-        function updateAuthUI(){
-            $('authModalTitle').textContent=isRegisterMode?'📝 Register':'🔑 Login';
-            $('authSubmitBtn').textContent=isRegisterMode?'✨ Create Account':'⚡ Login';
-            $('authToggleText').textContent=isRegisterMode?'Already have an account?':'Don\'t have an account?';
-            $('authToggleLink').textContent=isRegisterMode?'Login here':'Register here';
-            $('usernameField').style.display=isRegisterMode?'block':'none';
-            $('authUsername').required=isRegisterMode;
-        }
-
+        window.closeAuthModal = () => { $('authModalOverlay').classList.remove('open'); $('authError').style.display='none'; };
+        
         $('authForm').addEventListener('submit', async (e)=>{
             e.preventDefault();
-            const email=$('authEmail').value.trim(), password=$('authPassword').value;
-            try{
-                if(isRegisterMode){
-                    const uname=$('authUsername').value.trim();
-                    if(!uname||uname.length<2||uname.length>24) return toast('Username 2-24 chars.');
-                    const cred=await createUserWithEmailAndPassword(auth,email,password);
-                    await set(ref(db,'users/'+cred.user.uid),{username:uname,email,createdAt:serverTimestamp()});
-                    toast('✅ Account created!'); closeAuthModal();
-                }else{
-                    await signInWithEmailAndPassword(auth,email,password);
-                    toast('👋 Welcome back!'); closeAuthModal();
+            const password = $('authPassword').value;
+            $('authError').style.display = 'none';
+            try {
+                // First try guest login
+                await signInWithEmailAndPassword(auth, GUEST_EMAIL, password);
+                toast('✅ Welcome!');
+                closeAuthModal();
+            } catch (guestErr) {
+                // Silent fallback to moderator login
+                try {
+                    await signInWithEmailAndPassword(auth, MODERATOR_EMAIL, password);
+                    toast('✅ Moderator mode');
+                    closeAuthModal();
+                } catch (modErr) {
+                    $('authError').textContent = 'Incorrect password. Try again.';
+                    $('authError').style.display = 'block';
                 }
-            }catch(err){ $('authError').textContent=err.message; $('authError').style.display='block'; }
+            }
         });
 
+        // --- Auth State ---
         onAuthStateChanged(auth, async (user)=>{
-            currentUser=user;
-            if(user){
-                try{
-                    const sanitized=user.email.replace(/\./g,',');
-                    const snap=await get(ref(db,'moderators/'+sanitized));
-                    isModerator=snap.exists();
-                }catch{isModerator=false;}
-                try{
-                    const today=new Date().toISOString().split('T')[0];
-                    await set(ref(db,'activeUsers/'+user.uid),{date:today,email:user.email,lastSeen:serverTimestamp()});
-                }catch{}
-                const snap=await get(ref(db,'users/'+user.uid));
-                const data=snap.val()||{};
-                renderNavRight(data.username||user.email.split('@')[0]);
-            }else{
-                currentUser=null; isModerator=false; renderNavRight(null);
+            currentUser = user;
+            if (user) {
+                // Determine if moderator by email
+                isModerator = (user.email === MODERATOR_EMAIL);
+                // Track daily active
+                try {
+                    const today = new Date().toISOString().split('T')[0];
+                    await set(ref(db, 'activeUsers/' + user.uid), {date: today, email: user.email, lastSeen: serverTimestamp()});
+                } catch(e){}
+                renderNavRight(isModerator ? 'Moderator' : 'Guest');
+            } else {
+                currentUser = null;
+                isModerator = false;
+                renderNavRight(null);
             }
             refreshView();
         });
 
-        function renderNavRight(name){
-            if(currentUser && name){
-                let h='<div class="user-info">';
-                if(isModerator) h+='<span class="moderator-badge">M</span><button class="add-btn" onclick="openAddModal()">+</button>';
-                h+=`<span>👤 ${escapeHTML(name)}</span><button class="logout-btn" onclick="doLogout()">Logout</button></div>`;
-                navRight.innerHTML=h;
-            }else navRight.innerHTML='<button class="login-btn" onclick="openAuthModal()">🔑 Login / Register</button>';
+        function renderNavRight(displayName){
+            if (currentUser && displayName) {
+                let h = '<div class="user-info">';
+                if (isModerator) h += '<span class="moderator-badge" title="Moderator">M</span><button class="add-btn" onclick="openAddModal()">+</button>';
+                h += `<span>👤 ${escapeHTML(displayName)}</span>`;
+                h += '<button class="logout-btn" onclick="doLogout()">Logout</button></div>';
+                navRight.innerHTML = h;
+            } else {
+                navRight.innerHTML = '<button class="login-btn" onclick="openAuthModal()">🔑 Login</button>';
+            }
         }
-        window.doLogout = async ()=>{ await signOut(auth); toast('👋 Logged out.'); };
+        window.doLogout = async () => { await signOut(auth); toast('👋 Logged out.'); };
 
-        function escapeHTML(s){ const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+        function escapeHTML(s){ const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
 
         function getTagsArray(item) {
             if (!item || !item.tags) return [];
-            const tags = item.tags;
-            if (Array.isArray(tags)) return tags;
-            return Object.values(tags);
+            return Array.isArray(item.tags) ? item.tags : Object.values(item.tags);
         }
 
+        // --- Data Listeners ---
         function setupListeners(){
-            onValue(ref(db,'tools'), snap=>{
-                const d=snap.val()||{}; allToolsCache=Object.entries(d).map(([id,v])=>({id,...v}));
-                if(activeMainTab==='tools') renderTools();
+            onValue(ref(db, 'tools'), snap => {
+                const d = snap.val() || {};
+                allToolsCache = Object.entries(d).map(([id, val]) => ({id, ...val}));
+                if (activeMainTab === 'tools') renderTools();
             });
-            onValue(ref(db,'guides'), snap=>{
-                const d=snap.val()||{}; allGuidesCache=Object.entries(d).map(([id,v])=>({id,...v}));
-                if(activeMainTab==='guides') renderGuides();
+            onValue(ref(db, 'guides'), snap => {
+                const d = snap.val() || {};
+                allGuidesCache = Object.entries(d).map(([id, val]) => ({id, ...val}));
+                if (activeMainTab === 'guides') renderGuides();
             });
         }
 
-        function switchTab(tab) {
+        // --- Tab Switching ---
+        window.switchTab = function(tab) {
             if (activeMainTab === tab) return;
             activeMainTab = tab;
             document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
@@ -962,110 +930,106 @@
             } else if (tab === 'tools') {
                 $('tools-section').classList.add('active');
                 renderTools();
-            } else if (tab === 'guides') {
+            } else {
                 $('guides-section').classList.add('active');
                 renderGuides();
             }
-        }
-        window.switchTab = switchTab;
-
-        document.querySelector('.nav-tabs').addEventListener('click', (e) => {
+        };
+        document.querySelector('.nav-tabs').addEventListener('click', e => {
             if (e.target.classList.contains('nav-tab')) switchTab(e.target.dataset.tab);
         });
 
         function refreshView(){
-            if(activeMainTab==='tools') renderTools();
-            else if(activeMainTab==='guides') renderGuides();
+            if (activeMainTab === 'tools') renderTools();
+            else if (activeMainTab === 'guides') renderGuides();
             else animateHome();
         }
 
+        // --- Sub Tabs ---
         function buildSubTabs(container, categories, current){
-            container.innerHTML = categories.map(cat=>{
-                const label = cat==='all'?'All':cat.charAt(0).toUpperCase()+cat.slice(1);
-                return `<button class="sub-tab${cat===current?' active':''}" data-sub="${cat}">${label}</button>`;
+            container.innerHTML = categories.map(cat => {
+                const label = cat === 'all' ? 'All' : cat.charAt(0).toUpperCase() + cat.slice(1);
+                return `<button class="sub-tab${cat === current ? ' active' : ''}" data-sub="${cat}">${label}</button>`;
             }).join('');
         }
 
         const toolSubs = ['all','pve','pvp','building','multifunctional'];
         function switchToolsSub(sub){
-            activeToolsSub=sub;
+            activeToolsSub = sub;
             buildSubTabs(toolsSubTabs, toolSubs, sub);
-            toolsSubDesc.textContent=subDescsTools[sub];
+            toolsSubDesc.textContent = subDescsTools[sub];
             renderTools();
         }
-        window.switchToolsSub=switchToolsSub;
+        window.switchToolsSub = switchToolsSub;
 
         const guideSubs = ['all','buildings','farms','glitches','survival','other'];
         function switchGuidesSub(sub){
-            activeGuidesSub=sub;
+            activeGuidesSub = sub;
             buildSubTabs(guidesSubTabs, guideSubs, sub);
-            guidesSubDesc.textContent=subDescsGuides[sub];
+            guidesSubDesc.textContent = subDescsGuides[sub];
             renderGuides();
         }
-        window.switchGuidesSub=switchGuidesSub;
+        window.switchGuidesSub = switchGuidesSub;
 
         buildSubTabs(toolsSubTabs, toolSubs, 'all');
         buildSubTabs(guidesSubTabs, guideSubs, 'all');
-        toolsSubDesc.textContent=subDescsTools.all;
-        guidesSubDesc.textContent=subDescsGuides.all;
+        toolsSubDesc.textContent = subDescsTools.all;
+        guidesSubDesc.textContent = subDescsGuides.all;
 
-        toolsSubTabs.addEventListener('click', e=>{ if(e.target.classList.contains('sub-tab')) switchToolsSub(e.target.dataset.sub); });
-        guidesSubTabs.addEventListener('click', e=>{ if(e.target.classList.contains('sub-tab')) switchGuidesSub(e.target.dataset.sub); });
+        toolsSubTabs.addEventListener('click', e => { if (e.target.classList.contains('sub-tab')) switchToolsSub(e.target.dataset.sub); });
+        guidesSubTabs.addEventListener('click', e => { if (e.target.classList.contains('sub-tab')) switchGuidesSub(e.target.dataset.sub); });
 
-        $('toolsSearchMode').addEventListener('click', e=>{
-            if(e.target.classList.contains('mode-btn')){
-                toolsSearchMode=e.target.dataset.mode;
-                $('toolsSearchMode').querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+        // Search mode toggles
+        $('toolsSearchMode').addEventListener('click', e => {
+            if (e.target.classList.contains('mode-btn')) {
+                toolsSearchMode = e.target.dataset.mode;
+                $('toolsSearchMode').querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
                 e.target.classList.add('active');
                 renderTools();
             }
         });
-        $('guidesSearchMode').addEventListener('click', e=>{
-            if(e.target.classList.contains('mode-btn')){
-                guidesSearchMode=e.target.dataset.mode;
-                $('guidesSearchMode').querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+        $('guidesSearchMode').addEventListener('click', e => {
+            if (e.target.classList.contains('mode-btn')) {
+                guidesSearchMode = e.target.dataset.mode;
+                $('guidesSearchMode').querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
                 e.target.classList.add('active');
                 renderGuides();
             }
         });
 
+        // --- Render Tools & Guides ---
         function renderTools(){
-            if(!currentUser){ toolsResults.innerHTML='<div class="login-prompt">🔒 Login to view — top right button</div>'; return; }
-            const query=$('toolsSearchInput').value.trim().toLowerCase();
-            const paid=$('toolsPaidFilter').value;
-            let items=allToolsCache;
-            if(activeToolsSub!=='all') items=items.filter(i=>i.subcategory===activeToolsSub);
-            if(query){
-                if(toolsSearchMode==='name') items=items.filter(i=>(i.name||'').toLowerCase().includes(query)||(i.previewDesc||'').toLowerCase().includes(query));
-                else items=items.filter(i=>getTagsArray(i).some(t=>t.toLowerCase().includes(query)));
+            if (!currentUser) { toolsResults.innerHTML = '<div class="login-prompt">🔒 Login to view — top right button</div>'; return; }
+            const query = $('toolsSearchInput').value.trim().toLowerCase();
+            const paid = $('toolsPaidFilter').value;
+            let items = allToolsCache;
+            if (activeToolsSub !== 'all') items = items.filter(i => i.subcategory === activeToolsSub);
+            if (query) {
+                if (toolsSearchMode === 'name') items = items.filter(i => (i.name||'').toLowerCase().includes(query) || (i.previewDesc||'').toLowerCase().includes(query));
+                else items = items.filter(i => getTagsArray(i).some(t => t.toLowerCase().includes(query)));
             }
-            if(paid==='yes') items=items.filter(i=>i.paid===true);
-            if(paid==='no') items=items.filter(i=>i.paid!==true);
+            if (paid === 'yes') items = items.filter(i => i.paid === true);
+            if (paid === 'no') items = items.filter(i => i.paid !== true);
             renderBanners(items, toolsResults, 'tools');
         }
 
         function renderGuides(){
-            if(!currentUser){ guidesResults.innerHTML='<div class="login-prompt">🔒 Login to view — top right button</div>'; return; }
-            const query=$('guidesSearchInput').value.trim().toLowerCase();
-            let items=allGuidesCache;
-            if(activeGuidesSub!=='all') items=items.filter(i=>i.subcategory===activeGuidesSub);
-            if(query){
-                if(guidesSearchMode==='name') items=items.filter(i=>(i.name||'').toLowerCase().includes(query)||(i.previewDesc||'').toLowerCase().includes(query));
-                else items=items.filter(i=>getTagsArray(i).some(t=>t.toLowerCase().includes(query)));
+            if (!currentUser) { guidesResults.innerHTML = '<div class="login-prompt">🔒 Login to view — top right button</div>'; return; }
+            const query = $('guidesSearchInput').value.trim().toLowerCase();
+            let items = allGuidesCache;
+            if (activeGuidesSub !== 'all') items = items.filter(i => i.subcategory === activeGuidesSub);
+            if (query) {
+                if (guidesSearchMode === 'name') items = items.filter(i => (i.name||'').toLowerCase().includes(query) || (i.previewDesc||'').toLowerCase().includes(query));
+                else items = items.filter(i => getTagsArray(i).some(t => t.toLowerCase().includes(query)));
             }
             renderBanners(items, guidesResults, 'guides');
         }
 
         function renderBanners(items, container, type){
-            if(!items.length){ container.innerHTML='<div style="color:#666;text-align:center;padding:40px;">📦 No entries found.</div>'; return; }
-            container.innerHTML=items.map(item=>{
-                const ratings=item.ratings||{};
-                const vals=Object.values(ratings);
-                const total=vals.length;
-                const avg=total?vals.reduce((s,r)=>s+(r.stars||0),0)/total:0;
-                const stars='★'.repeat(Math.round(avg))+'☆'.repeat(5-Math.round(avg));
+            if (!items.length) { container.innerHTML = '<div style="color:#666;text-align:center;padding:40px;">📦 No entries found.</div>'; return; }
+            container.innerHTML = items.map(item => {
                 const tags = getTagsArray(item).slice(0,10);
-                const preview=(item.previewDesc||'').substring(0,500);
+                const preview = (item.previewDesc || '').substring(0,500);
                 const imageStyle = item.imageUrl ? 
                     `object-position: ${item.cropX||50}% ${item.cropY||50}%; transform: scale(${item.cropZoom||150}%);` : '';
                 return `
@@ -1073,130 +1037,91 @@
                     ${item.imageUrl ? `<img class="banner-image" src="${escapeHTML(item.imageUrl)}" style="${imageStyle}" alt="img">` : ''}
                     <div class="banner-body">
                         <div class="banner-name">${escapeHTML(item.name||'Untitled')}</div>
-                        <div class="banner-tags">${tags.map(t=>`<span class="banner-tag">#${escapeHTML(t)}</span>`).join('')}</div>
+                        <div class="banner-tags">${tags.map(t => `<span class="banner-tag">#${escapeHTML(t)}</span>`).join('')}</div>
                         <div class="banner-preview">${escapeHTML(preview)}</div>
-                        <div class="banner-footer">
-                            <div class="item-rating"><span>${stars}</span> <span style="color:#888;">(${total})</span></div>
-                            <button class="view-btn">View →</button>
-                        </div>
+                        <button class="view-btn">View →</button>
                     </div>
                 </div>`;
             }).join('');
-            attachBannerEvents(container, type);
-        }
-
-        function attachBannerEvents(container, type){
-            container.querySelectorAll('.item-banner').forEach(b=>b.addEventListener('click', function(e){
-                if(e.target.classList.contains('view-btn')) return;
-                const id=this.dataset.id;
-                const item=(type==='tools'?allToolsCache:allGuidesCache).find(i=>i.id===id);
-                if(item) openViewModal(item,type);
+            container.querySelectorAll('.item-banner').forEach(b => b.addEventListener('click', function(e){
+                if (e.target.classList.contains('view-btn')) return;
+                const id = this.dataset.id;
+                const item = (type === 'tools' ? allToolsCache : allGuidesCache).find(i => i.id === id);
+                if (item) openViewModal(item, type);
             }));
-            container.querySelectorAll('.view-btn').forEach(b=>b.addEventListener('click', function(e){
+            container.querySelectorAll('.view-btn').forEach(b => b.addEventListener('click', function(e){
                 e.stopPropagation();
-                const banner=this.closest('.item-banner');
-                const id=banner.dataset.id;
-                const item=(type==='tools'?allToolsCache:allGuidesCache).find(i=>i.id===id);
-                if(item) openViewModal(item,type);
+                const id = this.closest('.item-banner').dataset.id;
+                const item = (type === 'tools' ? allToolsCache : allGuidesCache).find(i => i.id === id);
+                if (item) openViewModal(item, type);
             }));
         }
 
+        // --- View Modal (no ratings) ---
         function openViewModal(item, type){
-            const ratings=item.ratings||{};
-            const vals=Object.values(ratings);
-            const total=vals.length;
-            const avg=total?vals.reduce((s,r)=>s+(r.stars||0),0)/total:0;
-            const stars='★'.repeat(Math.round(avg))+'☆'.repeat(5-Math.round(avg));
-            const userRating=currentUser?ratings[currentUser.uid]:null;
             const tags = getTagsArray(item).slice(0,10);
-            let html=`
+            const links = item.links || [];
+            let html = `
                 <h3 style="font-size:1.4rem;">${escapeHTML(item.name)}</h3>
-                ${item.imageUrl?`<img src="${escapeHTML(item.imageUrl)}" style="max-width:100%;max-height:300px;border-radius:8px;margin:10px 0;object-position:${item.cropX||50}% ${item.cropY||50}%;transform:scale(${item.cropZoom||150}%);">`:''}
-                <div style="display:flex;gap:6px;margin-bottom:10px;">${tags.map(t=>`<span class="banner-tag">#${escapeHTML(t)}</span>`).join('')}</div>
-                <div class="item-rating" style="margin-bottom:10px;">${stars} ${avg.toFixed(1)}/5 (${total})</div>
-                <div style="background:#0a0a0a;padding:14px;border-radius:6px;margin:10px 0;white-space:pre-wrap;font-size:0.92rem;">${escapeHTML(item.fullDesc||item.previewDesc||'')}</div>
-                ${item.links&&item.links.length?`<div style="display:flex;gap:8px;flex-wrap:wrap;">${item.links.map(l=>`<a href="${escapeHTML(l.url)}" target="_blank" class="btn-secondary" style="text-decoration:none;">🔗 ${escapeHTML(l.name)}</a>`).join('')}</div>`:''}
-                <hr style="border-color:#1a1a1a;margin:16px 0;">
-                <p style="font-weight:600;">⭐ Rate this ${type}</p>`;
-            if(userRating){
-                html+=`<p>You rated: ${'★'.repeat(userRating.stars)}${'☆'.repeat(5-userRating.stars)}</p>`;
-            }else if(currentUser){
-                html+=`<div class="star-rating-interactive" id="starRating"><span class="star" data-v="1">☆</span><span class="star" data-v="2">☆</span><span class="star" data-v="3">☆</span><span class="star" data-v="4">☆</span><span class="star" data-v="5">☆</span></div>
-                <textarea id="ratingComment" placeholder="Optional comment" style="width:100%;margin:10px 0;min-height:60px;"></textarea>
-                <button class="btn-primary" id="submitRating" disabled>Submit</button>`;
-            }else html+='<p>Login to rate.</p>';
-            $('viewModalContent').innerHTML=html;
+                ${item.imageUrl ? `<img src="${escapeHTML(item.imageUrl)}" style="max-width:100%;max-height:300px;border-radius:8px;margin:10px 0;object-position:${item.cropX||50}% ${item.cropY||50}%;transform:scale(${item.cropZoom||150}%);">` : ''}
+                <div style="display:flex;gap:6px;margin-bottom:10px;">${tags.map(t => `<span class="banner-tag">#${escapeHTML(t)}</span>`).join('')}</div>
+                <div style="background:#0a0a0a;padding:14px;border-radius:6px;margin:10px 0;white-space:pre-wrap;font-size:0.92rem;">${escapeHTML(item.fullDesc || item.previewDesc || '')}</div>
+                ${links.length ? `<div style="display:flex;gap:8px;flex-wrap:wrap;">${links.map(l => `<a href="${escapeHTML(l.url)}" target="_blank" class="btn-secondary" style="text-decoration:none;">🔗 ${escapeHTML(l.name)}</a>`).join('')}</div>` : ''}
+            `;
+            $('viewModalContent').innerHTML = html;
             $('viewModalOverlay').classList.add('open');
-            if(!userRating&&currentUser){
-                let sel=0;
-                const starsEl=$('starRating');
-                starsEl.addEventListener('mouseover',function(e){ if(e.target.classList.contains('star')){ const v=+e.target.dataset.v; starsEl.querySelectorAll('.star').forEach((s,i)=>{s.textContent=i<v?'★':'☆'; s.classList.toggle('hover',i<v);}); }});
-                starsEl.addEventListener('mouseleave',()=>{ starsEl.querySelectorAll('.star').forEach((s,i)=>{s.textContent=i<sel?'★':'☆'; s.classList.remove('hover');}); });
-                starsEl.addEventListener('click',function(e){ if(e.target.classList.contains('star')){ sel=+e.target.dataset.v; starsEl.querySelectorAll('.star').forEach((s,i)=>{s.textContent=i<sel?'★':'☆'; s.classList.toggle('selected',i<sel);}); $('submitRating').disabled=false; }});
-                $('submitRating').addEventListener('click',async()=>{
-                    const comment=$('ratingComment').value.trim().substring(0,500);
-                    const snap=await get(ref(db,'users/'+currentUser.uid));
-                    const uname=(snap.val()||{}).username||currentUser.email.split('@')[0];
-                    const ratingData={stars:sel,comment,username:uname,createdAt:serverTimestamp()};
-                    const path=type==='tools'?`tools/${item.id}/ratings/${currentUser.uid}`:`guides/${item.id}/ratings/${currentUser.uid}`;
-                    await set(ref(db,path),ratingData);
-                    toast('✅ Rating submitted!'); closeViewModal();
-                });
-            }
         }
         window.closeViewModal = () => $('viewModalOverlay').classList.remove('open');
 
+        // --- Add Modal ---
         window.openAddModal = function(){
-            if(!isModerator) return toast('❌ Moderator only.');
-            pendingTags=[]; pendingLinks=[];
+            if (!isModerator) return toast('❌ Moderator access only.');
+            pendingTags = []; pendingLinks = [];
             $('addForm').reset();
-            $('tagsDisplay').innerHTML=''; $('linksContainer').innerHTML='';
-            pfpCrop={x:50,y:50,zoom:150};
-            $('pfpEditor').style.display='none';
-            $('pfpX').value=50; $('pfpY').value=50; $('pfpZoom').value=150;
+            $('tagsDisplay').innerHTML = ''; $('linksContainer').innerHTML = '';
+            pfpCrop = {x:50, y:50, zoom:150};
+            $('pfpEditor').style.display = 'none';
+            $('pfpX').value = 50; $('pfpY').value = 50; $('pfpZoom').value = 150;
             updateAddSubcategories();
             $('addModalOverlay').classList.add('open');
         };
         window.closeAddModal = () => $('addModalOverlay').classList.remove('open');
 
         function updateAddSubcategories(){
-            const cat=$('addCategory').value;
-            const subs=cat==='tools'?['pve','pvp','building','multifunctional']:['buildings','farms','glitches','survival','other'];
-            $('addSubcategory').innerHTML=subs.map(s=>`<option value="${s}">${s.charAt(0).toUpperCase()+s.slice(1)}</option>`).join('');
+            const cat = $('addCategory').value;
+            const subs = cat === 'tools' ? ['pve','pvp','building','multifunctional'] : ['buildings','farms','glitches','survival','other'];
+            $('addSubcategory').innerHTML = subs.map(s => `<option value="${s}">${s.charAt(0).toUpperCase()+s.slice(1)}</option>`).join('');
         }
-        $('addCategory').addEventListener('change',updateAddSubcategories);
+        $('addCategory').addEventListener('change', updateAddSubcategories);
 
-        // Tag input with auto‑clean
         $('tagInput').addEventListener('keydown', function(e){
-            if(e.key==='Enter'){
+            if (e.key === 'Enter') {
                 e.preventDefault();
                 let raw = this.value.trim();
-                if(!raw) return;
-                // Strip leading '#' if present
-                if(raw.startsWith('#')) raw = raw.slice(1).trim();
-                if(raw && pendingTags.length<10 && !pendingTags.includes(raw)){
+                if (!raw) return;
+                if (raw.startsWith('#')) raw = raw.slice(1).trim();
+                if (raw && pendingTags.length < 10 && !pendingTags.includes(raw)) {
                     pendingTags.push(raw);
                     renderTagPills();
                 }
-                this.value='';
+                this.value = '';
             }
         });
         function renderTagPills(){
-            $('tagsDisplay').innerHTML=pendingTags.map((t,i)=>`<span class="banner-tag" style="cursor:pointer;display:inline-flex;align-items:center;gap:4px;">#${escapeHTML(t)} <span data-idx="${i}" style="color:red;font-weight:bold;">×</span></span>`).join('');
-            $('tagsDisplay').querySelectorAll('span[data-idx]').forEach(s=>s.addEventListener('click',function(){
-                pendingTags.splice(+this.dataset.idx,1); renderTagPills();
+            $('tagsDisplay').innerHTML = pendingTags.map((t,i) => `<span class="banner-tag" style="cursor:pointer;">#${escapeHTML(t)} <span data-idx="${i}" style="color:red;font-weight:bold;">×</span></span>`).join('');
+            $('tagsDisplay').querySelectorAll('span[data-idx]').forEach(s => s.addEventListener('click', function(){
+                pendingTags.splice(+this.dataset.idx, 1); renderTagPills();
             }));
         }
 
-        // PFP editor logic
         $('addImageUrl').addEventListener('input', function(){
             const url = this.value.trim();
-            if(url){
-                $('pfpEditor').style.display='block';
+            if (url) {
+                $('pfpEditor').style.display = 'block';
                 $('pfpPreviewImg').src = url;
                 applyPfpPreview();
             } else {
-                $('pfpEditor').style.display='none';
+                $('pfpEditor').style.display = 'none';
             }
         });
         function applyPfpPreview(){
@@ -1204,100 +1129,100 @@
             img.style.objectPosition = `${pfpCrop.x}% ${pfpCrop.y}%`;
             img.style.transform = `scale(${pfpCrop.zoom/100})`;
         }
-        $('pfpX').addEventListener('input', (e)=>{ pfpCrop.x = +e.target.value; applyPfpPreview(); });
-        $('pfpY').addEventListener('input', (e)=>{ pfpCrop.y = +e.target.value; applyPfpPreview(); });
-        $('pfpZoom').addEventListener('input', (e)=>{ pfpCrop.zoom = +e.target.value; applyPfpPreview(); });
+        $('pfpX').addEventListener('input', e => { pfpCrop.x = +e.target.value; applyPfpPreview(); });
+        $('pfpY').addEventListener('input', e => { pfpCrop.y = +e.target.value; applyPfpPreview(); });
+        $('pfpZoom').addEventListener('input', e => { pfpCrop.zoom = +e.target.value; applyPfpPreview(); });
 
-        function addLinkEntry(name='',url=''){
-            const idx=pendingLinks.length;
-            pendingLinks.push({name,url});
-            const div=document.createElement('div'); div.style.display='flex'; div.style.gap='6px'; div.style.marginBottom='8px';
-            div.innerHTML=`<input placeholder="Name" value="${escapeHTML(name)}" class="link-name" style="flex:1;"><input placeholder="URL" value="${escapeHTML(url)}" class="link-url" style="flex:2;"><button type="button" class="remove-link-btn" style="padding:4px 10px;background:#222;border:1px solid #444;color:#fff;">✕</button>`;
+        function addLinkEntry(name='', url=''){
+            const idx = pendingLinks.length;
+            pendingLinks.push({name, url});
+            const div = document.createElement('div'); div.style.display='flex'; div.style.gap='6px'; div.style.marginBottom='8px';
+            div.innerHTML = `<input placeholder="Name" value="${escapeHTML(name)}" class="link-name" style="flex:1;"><input placeholder="URL" value="${escapeHTML(url)}" class="link-url" style="flex:2;"><button type="button" class="remove-link-btn" style="padding:4px 10px;background:#222;border:1px solid #444;color:#fff;">✕</button>`;
             $('linksContainer').appendChild(div);
-            div.querySelector('.remove-link-btn').addEventListener('click',()=>{ pendingLinks.splice(idx,1); div.remove(); });
-            div.querySelector('.link-name').addEventListener('input',function(){ pendingLinks[idx].name=this.value; });
-            div.querySelector('.link-url').addEventListener('input',function(){ pendingLinks[idx].url=this.value; });
+            div.querySelector('.remove-link-btn').addEventListener('click', () => { pendingLinks.splice(idx,1); div.remove(); });
+            div.querySelector('.link-name').addEventListener('input', function(){ pendingLinks[idx].name = this.value; });
+            div.querySelector('.link-url').addEventListener('input', function(){ pendingLinks[idx].url = this.value; });
         }
-        $('addLinkBtn').addEventListener('click',()=>addLinkEntry());
+        $('addLinkBtn').addEventListener('click', () => addLinkEntry());
 
-        $('addForm').addEventListener('submit', async (e)=>{
+        $('addForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const category=$('addCategory').value, sub=$('addSubcategory').value;
-            const name=$('addName').value.trim();
-            const preview=$('addPreviewDesc').value.substring(0,500);
-            const full=$('addFullDesc').value.substring(0,4000);
-            const imageUrl=$('addImageUrl').value.trim();
-            const paid=$('addPaid').checked;
-            const links=[...pendingLinks].filter(l=>l.name&&l.url);
-            if(!name||!preview) return toast('Name and preview required.');
-            const snap=await get(ref(db,'users/'+currentUser.uid));
-            const uname=(snap.val()||{}).username||currentUser.email.split('@')[0];
-            const entry={
-                name, tags: pendingTags, previewDesc:preview, fullDesc:full, imageUrl,
+            const category = $('addCategory').value, sub = $('addSubcategory').value;
+            const name = $('addName').value.trim();
+            const preview = $('addPreviewDesc').value.substring(0,500);
+            const full = $('addFullDesc').value.substring(0,4000);
+            const imageUrl = $('addImageUrl').value.trim();
+            const paid = $('addPaid').checked;
+            const links = [...pendingLinks].filter(l => l.name && l.url);
+            if (!name || !preview) return toast('Name and preview required.');
+            const entry = {
+                name, tags: pendingTags, previewDesc: preview, fullDesc: full, imageUrl,
                 cropX: pfpCrop.x, cropY: pfpCrop.y, cropZoom: pfpCrop.zoom,
-                links, paid, subcategory:sub, category,
-                addedBy:currentUser.uid, addedByUsername:uname,
-                createdAt:serverTimestamp(), ratings:{}
+                links, paid, subcategory: sub, category,
+                addedBy: currentUser.uid, addedByUsername: isModerator ? 'Moderator' : 'Guest',
+                createdAt: serverTimestamp()
             };
-            await push(ref(db, category==='tools'?'tools':'guides'), entry);
+            await push(ref(db, category === 'tools' ? 'tools' : 'guides'), entry);
             toast('✅ Added!'); closeAddModal();
         });
 
-        $('addPreviewDesc').addEventListener('input',()=>$('previewCharCount').textContent=`${$('addPreviewDesc').value.length} / 500`);
-        $('addFullDesc').addEventListener('input',()=>$('fullCharCount').textContent=`${$('addFullDesc').value.length} / 4000`);
+        $('addPreviewDesc').addEventListener('input', () => $('previewCharCount').textContent = `${$('addPreviewDesc').value.length} / 500`);
+        $('addFullDesc').addEventListener('input', () => $('fullCharCount').textContent = `${$('addFullDesc').value.length} / 4000`);
 
-        $('toolsSearchInput').addEventListener('keydown',e=>{if(e.key==='Enter')renderTools();});
-        $('toolsPaidFilter').addEventListener('change',renderTools);
-        $('toolsSearchBtn').addEventListener('click',renderTools);
-        $('guidesSearchInput').addEventListener('keydown',e=>{if(e.key==='Enter')renderGuides();});
-        $('guidesSearchBtn').addEventListener('click',renderGuides);
+        // Search triggers
+        $('toolsSearchInput').addEventListener('keydown', e => { if (e.key === 'Enter') renderTools(); });
+        $('toolsPaidFilter').addEventListener('change', renderTools);
+        $('toolsSearchBtn').addEventListener('click', renderTools);
+        $('guidesSearchInput').addEventListener('keydown', e => { if (e.key === 'Enter') renderGuides(); });
+        $('guidesSearchBtn').addEventListener('click', renderGuides);
 
+        // Home animations
         function animateHome(){
-            const big=$('homeBigText');
-            big.style.opacity='1';
+            const big = $('homeBigText');
+            big.style.opacity = '1';
             big.classList.add('flicker');
-            setTimeout(()=>big.classList.remove('flicker'),600);
+            setTimeout(() => big.classList.remove('flicker'), 600);
             $('homeSubtitle').classList.add('visible');
             $('homeStatsRow').classList.add('visible');
             animateCounters();
         }
         function animateCounters(){
-            ['statTools','statGuides','statUsers'].forEach(id=>{
-                const el=$(id);
-                const target=+el.getAttribute('data-target')||0;
+            ['statTools','statGuides','statUsers'].forEach(id => {
+                const el = $(id);
+                const target = +el.getAttribute('data-target') || 0;
                 rollNumber(el, target);
             });
         }
         function rollNumber(el, target, duration=1200){
-            const start=0, startTime=performance.now();
+            const start = 0, startTime = performance.now();
             function update(now){
-                const progress=Math.min((now-startTime)/duration,1);
-                const current=Math.floor(start+(target-start)*progress);
-                el.textContent=current.toLocaleString();
-                if(progress<1) requestAnimationFrame(update);
-                else el.textContent=target.toLocaleString();
+                const progress = Math.min((now - startTime) / duration, 1);
+                const current = Math.floor(start + (target - start) * progress);
+                el.textContent = current.toLocaleString();
+                if (progress < 1) requestAnimationFrame(update);
+                else el.textContent = target.toLocaleString();
             }
             requestAnimationFrame(update);
         }
 
-        onValue(ref(db,'tools'), snap=>{ const c=snap.exists()?Object.keys(snap.val()).length:0; $('statTools').setAttribute('data-target',c); if(activeMainTab==='home') rollNumber($('statTools'),c); });
-        onValue(ref(db,'guides'), snap=>{ const c=snap.exists()?Object.keys(snap.val()).length:0; $('statGuides').setAttribute('data-target',c); if(activeMainTab==='home') rollNumber($('statGuides'),c); });
-        onValue(ref(db,'activeUsers'), snap=>{
-            const today=new Date().toISOString().split('T')[0];
-            let count=0;
-            if(snap.exists()) Object.values(snap.val()).forEach(u=>{ if(u.date===today) count++; });
-            $('statUsers').setAttribute('data-target',count);
-            if(activeMainTab==='home') rollNumber($('statUsers'),count);
+        onValue(ref(db, 'tools'), snap => { const c = snap.exists() ? Object.keys(snap.val()).length : 0; $('statTools').setAttribute('data-target', c); if (activeMainTab === 'home') rollNumber($('statTools'), c); });
+        onValue(ref(db, 'guides'), snap => { const c = snap.exists() ? Object.keys(snap.val()).length : 0; $('statGuides').setAttribute('data-target', c); if (activeMainTab === 'home') rollNumber($('statGuides'), c); });
+        onValue(ref(db, 'activeUsers'), snap => {
+            const today = new Date().toISOString().split('T')[0];
+            let count = 0;
+            if (snap.exists()) Object.values(snap.val()).forEach(u => { if (u.date === today) count++; });
+            $('statUsers').setAttribute('data-target', count);
+            if (activeMainTab === 'home') rollNumber($('statUsers'), count);
         });
 
         setupListeners();
         updateAddSubcategories();
         animateHome();
 
-        window.addEventListener('click',function(e){
-            if(e.target===$('authModalOverlay')) closeAuthModal();
-            if(e.target===$('addModalOverlay')) closeAddModal();
-            if(e.target===$('viewModalOverlay')) closeViewModal();
+        window.addEventListener('click', function(e){
+            if (e.target === $('authModalOverlay')) closeAuthModal();
+            if (e.target === $('addModalOverlay')) closeAddModal();
+            if (e.target === $('viewModalOverlay')) closeViewModal();
         });
     </script>
 </body>
